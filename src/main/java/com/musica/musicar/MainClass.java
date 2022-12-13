@@ -9,8 +9,8 @@ package com.musica.musicar;
  * @author Camilo
  */
 public class MainClass {
-   
-    
+
+
     public static void main(String[] args) {
         new Musicar().setVisible(true);
     }
