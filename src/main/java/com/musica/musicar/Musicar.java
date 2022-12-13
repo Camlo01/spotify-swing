@@ -4,10 +4,14 @@
  */
 package com.musica.musicar;
 
+import javax.swing.*;
+import java.awt.*;
+
 /**
  * @author Camilo
  */
 public class Musicar extends javax.swing.JFrame {
+    private int yWhereLoadPlayList = 0;
 
     /**
      * Creates new form Home
@@ -50,7 +54,6 @@ public class Musicar extends javax.swing.JFrame {
         labelPlayerArtistSong = new javax.swing.JLabel();
         panelBody = new java.awt.Panel();
         panelLeftBody = new java.awt.Panel();
-        panelLeftUpBodyButtons = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
         buttonEpisodes = new javax.swing.JButton();
         buttonFavorites = new javax.swing.JButton();
@@ -58,7 +61,8 @@ public class Musicar extends javax.swing.JFrame {
         buttonLibrary = new javax.swing.JButton();
         buttonSearch = new javax.swing.JButton();
         buttonHome = new javax.swing.JButton();
-        panelLeftDownBody = new javax.swing.JPanel();
+        jScrolPanelPlayLists = new javax.swing.JScrollPane();
+        whereLoadButtonsOfPlaylist = new javax.swing.JPanel();
         panelRightBody = new java.awt.Panel();
         panelBodyCentral = new javax.swing.JPanel();
         jTabbedPanel = new javax.swing.JTabbedPane();
@@ -247,9 +251,9 @@ public class Musicar extends javax.swing.JFrame {
             .addGroup(panelBottomBarLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(panelPlayerOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                 .addComponent(panelPlayerVolumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -267,8 +271,6 @@ public class Musicar extends javax.swing.JFrame {
 
         panelLeftBody.setBackground(new java.awt.Color(0, 0, 0));
 
-        panelLeftUpBodyButtons.setBackground(new java.awt.Color(204, 204, 204));
-
         jSeparator1.setBackground(new java.awt.Color(204, 204, 204));
 
         buttonEpisodes.addActionListener((e) -> {
@@ -283,8 +285,29 @@ public class Musicar extends javax.swing.JFrame {
 
         buttonCreatePlayList.addActionListener((e) -> {
             int count =jTabbedPanel.getTabCount();
-            jTabbedPanel.addTab("tab"+count, new javax.swing.JPanel());
+            int numberOfPlayList = count-4;
+            jTabbedPanel.addTab("play"+numberOfPlayList, new javax.swing.JPanel());
             jTabbedPanel.setSelectedIndex(count);
+
+            JButton buttonToAdd = new JButton("Button"+ numberOfPlayList);
+            buttonToAdd.setBounds(0,yWhereLoadPlayList, 131, 30);
+            yWhereLoadPlayList += 30;
+            whereLoadButtonsOfPlaylist.add(buttonToAdd);
+
+            javax.swing.GroupLayout whereLoadButtonsOfPlaylistLayout = new javax.swing.GroupLayout(whereLoadButtonsOfPlaylist);
+            whereLoadButtonsOfPlaylist.setLayout(whereLoadButtonsOfPlaylistLayout);
+            whereLoadButtonsOfPlaylistLayout.setHorizontalGroup(
+                    whereLoadButtonsOfPlaylistLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                            .addGap(0, 131, Short.MAX_VALUE)
+            );
+            jScrolPanelPlayLists.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+            whereLoadButtonsOfPlaylistLayout.setVerticalGroup(
+                    whereLoadButtonsOfPlaylistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGap(0, yWhereLoadPlayList, Short.MAX_VALUE)
+            );
+            buttonToAdd.setVisible(true);
+
         });
         buttonCreatePlayList.setText("Crear Playlist");
 
@@ -303,26 +326,40 @@ public class Musicar extends javax.swing.JFrame {
             jTabbedPanel.setSelectedIndex(0);
         });
 
-        javax.swing.GroupLayout panelLeftUpBodyButtonsLayout = new javax.swing.GroupLayout(panelLeftUpBodyButtons);
-        panelLeftUpBodyButtons.setLayout(panelLeftUpBodyButtonsLayout);
-        panelLeftUpBodyButtonsLayout.setHorizontalGroup(
-            panelLeftUpBodyButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLeftUpBodyButtonsLayout.createSequentialGroup()
-                .addGap(11, 11, 11)
-                .addGroup(panelLeftUpBodyButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jSeparator1)
-                    .addComponent(buttonEpisodes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonFavorites, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonCreatePlayList, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonLibrary, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonSearch, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(buttonHome, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(13, Short.MAX_VALUE))
+        javax.swing.GroupLayout whereLoadButtonsOfPlaylistLayout = new javax.swing.GroupLayout(whereLoadButtonsOfPlaylist);
+        whereLoadButtonsOfPlaylist.setLayout(whereLoadButtonsOfPlaylistLayout);
+        whereLoadButtonsOfPlaylistLayout.setHorizontalGroup(
+            whereLoadButtonsOfPlaylistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 131, Short.MAX_VALUE)
         );
-        panelLeftUpBodyButtonsLayout.setVerticalGroup(
-            panelLeftUpBodyButtonsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLeftUpBodyButtonsLayout.createSequentialGroup()
-                .addContainerGap(50, Short.MAX_VALUE)
+        whereLoadButtonsOfPlaylistLayout.setVerticalGroup(
+            whereLoadButtonsOfPlaylistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        jScrolPanelPlayLists.setViewportView(whereLoadButtonsOfPlaylist);
+
+        javax.swing.GroupLayout panelLeftBodyLayout = new javax.swing.GroupLayout(panelLeftBody);
+        panelLeftBody.setLayout(panelLeftBodyLayout);
+        panelLeftBodyLayout.setHorizontalGroup(
+            panelLeftBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelLeftBodyLayout.createSequentialGroup()
+                .addContainerGap(9, Short.MAX_VALUE)
+                .addGroup(panelLeftBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jScrolPanelPlayLists)
+                    .addComponent(jSeparator1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(buttonEpisodes, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonFavorites, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonCreatePlayList, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonLibrary, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(buttonHome, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(8, 8, 8))
+        );
+        panelLeftBodyLayout.setVerticalGroup(
+            panelLeftBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelLeftBodyLayout.createSequentialGroup()
+                .addGap(23, 23, 23)
                 .addComponent(buttonHome)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(buttonSearch)
@@ -336,42 +373,18 @@ public class Musicar extends javax.swing.JFrame {
                 .addComponent(buttonEpisodes)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout panelLeftDownBodyLayout = new javax.swing.GroupLayout(panelLeftDownBody);
-        panelLeftDownBody.setLayout(panelLeftDownBodyLayout);
-        panelLeftDownBodyLayout.setHorizontalGroup(
-            panelLeftDownBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-        panelLeftDownBodyLayout.setVerticalGroup(
-            panelLeftDownBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
-        );
-
-        javax.swing.GroupLayout panelLeftBodyLayout = new javax.swing.GroupLayout(panelLeftBody);
-        panelLeftBody.setLayout(panelLeftBodyLayout);
-        panelLeftBodyLayout.setHorizontalGroup(
-            panelLeftBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelLeftUpBodyButtons, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(panelLeftDownBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
-        panelLeftBodyLayout.setVerticalGroup(
-            panelLeftBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelLeftBodyLayout.createSequentialGroup()
-                .addComponent(panelLeftUpBodyButtons, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(panelLeftDownBody, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrolPanelPlayLists, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
         panelRightBody.setBackground(new java.awt.Color(153, 153, 153));
+        panelRightBody.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout panelRightBodyLayout = new javax.swing.GroupLayout(panelRightBody);
         panelRightBody.setLayout(panelRightBodyLayout);
         panelRightBodyLayout.setHorizontalGroup(
             panelRightBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 264, Short.MAX_VALUE)
+            .addGap(0, 169, Short.MAX_VALUE)
         );
         panelRightBodyLayout.setVerticalGroup(
             panelRightBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -390,14 +403,14 @@ public class Musicar extends javax.swing.JFrame {
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(labelHomeTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(361, Short.MAX_VALUE))
+                .addContainerGap(481, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(labelHomeTitle)
-                .addContainerGap(645, Short.MAX_VALUE))
+                .addContainerGap(657, Short.MAX_VALUE))
         );
 
         jScrollPane1.setViewportView(jPanel8);
@@ -406,11 +419,11 @@ public class Musicar extends javax.swing.JFrame {
         jPanelHome.setLayout(jPanelHomeLayout);
         jPanelHomeLayout.setHorizontalGroup(
             jPanelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
         );
         jPanelHomeLayout.setVerticalGroup(
             jPanelHomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 556, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 555, Short.MAX_VALUE)
         );
 
         jTabbedPanel.addTab("tab1", jPanelHome);
@@ -425,14 +438,14 @@ public class Musicar extends javax.swing.JFrame {
             .addGroup(jPanelSearchLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(labelSearchTitle)
-                .addContainerGap(357, Short.MAX_VALUE))
+                .addContainerGap(477, Short.MAX_VALUE))
         );
         jPanelSearchLayout.setVerticalGroup(
             jPanelSearchLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelSearchLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(labelSearchTitle)
-                .addContainerGap(479, Short.MAX_VALUE))
+                .addContainerGap(478, Short.MAX_VALUE))
         );
 
         jTabbedPanel.addTab("tab2", jPanelSearch);
@@ -447,14 +460,14 @@ public class Musicar extends javax.swing.JFrame {
             .addGroup(jPanelLibraryLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(labelPlayListTitle)
-                .addContainerGap(407, Short.MAX_VALUE))
+                .addContainerGap(527, Short.MAX_VALUE))
         );
         jPanelLibraryLayout.setVerticalGroup(
             jPanelLibraryLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelLibraryLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(labelPlayListTitle)
-                .addContainerGap(479, Short.MAX_VALUE))
+                .addContainerGap(478, Short.MAX_VALUE))
         );
 
         jTabbedPanel.addTab("tab3", jPanelLibrary);
@@ -469,14 +482,14 @@ public class Musicar extends javax.swing.JFrame {
             .addGroup(jPanelFavoritesLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(labelFavoritesTitle)
-                .addContainerGap(371, Short.MAX_VALUE))
+                .addContainerGap(491, Short.MAX_VALUE))
         );
         jPanelFavoritesLayout.setVerticalGroup(
             jPanelFavoritesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelFavoritesLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(labelFavoritesTitle)
-                .addContainerGap(479, Short.MAX_VALUE))
+                .addContainerGap(478, Short.MAX_VALUE))
         );
 
         jTabbedPanel.addTab("tab5", jPanelFavorites);
@@ -491,14 +504,14 @@ public class Musicar extends javax.swing.JFrame {
             .addGroup(jPanelEpisodesLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(labelEpisodesTitle)
-                .addContainerGap(363, Short.MAX_VALUE))
+                .addContainerGap(483, Short.MAX_VALUE))
         );
         jPanelEpisodesLayout.setVerticalGroup(
             jPanelEpisodesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEpisodesLayout.createSequentialGroup()
                 .addGap(30, 30, 30)
                 .addComponent(labelEpisodesTitle)
-                .addContainerGap(479, Short.MAX_VALUE))
+                .addContainerGap(478, Short.MAX_VALUE))
         );
 
         jTabbedPanel.addTab("tab6", jPanelEpisodes);
@@ -507,7 +520,7 @@ public class Musicar extends javax.swing.JFrame {
         panelBodyCentral.setLayout(panelBodyCentralLayout);
         panelBodyCentralLayout.setHorizontalGroup(
             panelBodyCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jTabbedPanel)
+            .addComponent(jTabbedPanel, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         panelBodyCentralLayout.setVerticalGroup(
             panelBodyCentralLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -619,6 +632,7 @@ public class Musicar extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelHome;
     private javax.swing.JPanel jPanelLibrary;
     private javax.swing.JPanel jPanelSearch;
+    private javax.swing.JScrollPane jScrolPanelPlayLists;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
@@ -638,13 +652,12 @@ public class Musicar extends javax.swing.JFrame {
     private javax.swing.JPanel panelBodyCentral;
     private java.awt.Panel panelBottomBar;
     private java.awt.Panel panelLeftBody;
-    private javax.swing.JPanel panelLeftDownBody;
-    private javax.swing.JPanel panelLeftUpBodyButtons;
     private javax.swing.JPanel panelPlayerCoverSong;
     private java.awt.Panel panelPlayerOptions;
     private java.awt.Panel panelPlayerVolumen;
     private java.awt.Panel panelRightBody;
     private java.awt.PopupMenu popupMenu1;
     private java.awt.PopupMenu popupMenu2;
+    private javax.swing.JPanel whereLoadButtonsOfPlaylist;
     // End of variables declaration//GEN-END:variables
 }

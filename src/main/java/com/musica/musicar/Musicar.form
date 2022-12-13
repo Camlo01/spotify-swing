@@ -299,6 +299,9 @@
             </Component>
             <Container class="javax.swing.JPanel" name="panelPlayerCoverSong">
               <Properties>
+                <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="cc" green="cc" red="ff" type="rgb"/>
+                </Property>
                 <Property name="preferredSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
                   <Dimension value="[30, 30]"/>
                 </Property>
@@ -364,140 +367,121 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelLeftUpBodyButtons" max="32767" attributes="0"/>
-                  <Component id="panelLeftDownBody" alignment="0" max="32767" attributes="0"/>
+                  <Group type="102" alignment="1" attributes="0">
+                      <EmptySpace pref="9" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                          <Component id="jScrolPanelPlayLists" max="32767" attributes="0"/>
+                          <Component id="jSeparator1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="buttonEpisodes" alignment="0" max="32767" attributes="0"/>
+                          <Component id="buttonFavorites" alignment="0" max="32767" attributes="0"/>
+                          <Component id="buttonCreatePlayList" alignment="0" max="32767" attributes="0"/>
+                          <Component id="buttonLibrary" alignment="0" max="32767" attributes="0"/>
+                          <Component id="buttonSearch" alignment="0" max="32767" attributes="0"/>
+                          <Component id="buttonHome" alignment="1" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
+                  </Group>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <Component id="panelLeftUpBodyButtons" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
+                      <Component id="buttonHome" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="panelLeftDownBody" max="32767" attributes="0"/>
+                      <Component id="buttonSearch" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonLibrary" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
+                      <Component id="buttonCreatePlayList" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonFavorites" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="buttonEpisodes" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
+                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                      <Component id="jScrolPanelPlayLists" pref="0" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
           </Layout>
           <SubComponents>
-            <Container class="javax.swing.JPanel" name="panelLeftUpBodyButtons">
+            <Component class="javax.swing.JSeparator" name="jSeparator1">
               <Properties>
                 <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                   <Color blue="cc" green="cc" red="cc" type="rgb"/>
                 </Property>
               </Properties>
+            </Component>
+            <Component class="javax.swing.JButton" name="buttonEpisodes">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tus episodios"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonEpisodes.addActionListener((e) -&gt; {&#xa;jTabbedPanel.setSelectedIndex(4);&#xa;});"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="buttonFavorites">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tus me gusta"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonFavorites.addActionListener((e) -&gt; {&#xa;jTabbedPanel.setSelectedIndex(3);&#xa;});"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="buttonCreatePlayList">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Crear Playlist"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonCreatePlayList.addActionListener((e) -&gt; {&#xa;        int count =jTabbedPanel.getTabCount();&#xa;jTabbedPanel.addTab(&quot;tab&quot;+count, new javax.swing.JPanel());&#xa;jTabbedPanel.setSelectedIndex(count);&#xa;});"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="buttonLibrary">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Tu Biblioteca"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonLibrary.addActionListener((e) -&gt; {&#xa;jTabbedPanel.setSelectedIndex(2);&#xa;});"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="buttonSearch">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Buscar"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonSearch.addActionListener((e) -&gt; {&#xa;jTabbedPanel.setSelectedIndex(1);&#xa;});"/>
+              </AuxValues>
+            </Component>
+            <Component class="javax.swing.JButton" name="buttonHome">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Inicio"/>
+              </Properties>
+              <AuxValues>
+                <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonHome.addActionListener((e) -&gt; {&#xa;jTabbedPanel.setSelectedIndex(0);&#xa;});"/>
+              </AuxValues>
+            </Component>
+            <Container class="javax.swing.JScrollPane" name="jScrolPanelPlayLists">
 
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="jSeparator1" max="32767" attributes="0"/>
-                              <Component id="buttonEpisodes" max="32767" attributes="0"/>
-                              <Component id="buttonFavorites" alignment="0" max="32767" attributes="0"/>
-                              <Component id="buttonCreatePlayList" alignment="0" max="32767" attributes="0"/>
-                              <Component id="buttonLibrary" alignment="0" max="32767" attributes="0"/>
-                              <Component id="buttonSearch" alignment="0" max="32767" attributes="0"/>
-                              <Component id="buttonHome" alignment="0" min="-2" pref="134" max="-2" attributes="0"/>
-                          </Group>
-                          <EmptySpace pref="13" max="32767" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="1" attributes="0">
-                          <EmptySpace pref="50" max="32767" attributes="0"/>
-                          <Component id="buttonHome" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="buttonSearch" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="buttonLibrary" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="37" max="-2" attributes="0"/>
-                          <Component id="buttonCreatePlayList" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="buttonFavorites" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="buttonEpisodes" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="jSeparator1" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" max="-2" attributes="0"/>
-                      </Group>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
+              <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
               <SubComponents>
-                <Component class="javax.swing.JSeparator" name="jSeparator1">
-                  <Properties>
-                    <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-                      <Color blue="cc" green="cc" red="cc" type="rgb"/>
-                    </Property>
-                  </Properties>
-                </Component>
-                <Component class="javax.swing.JButton" name="buttonEpisodes">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tus episodios"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonEpisodes.addActionListener((e) -&gt; {&#xa;jTabbedPanel.setSelectedIndex(4);&#xa;});"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JButton" name="buttonFavorites">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tus me gusta"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonFavorites.addActionListener((e) -&gt; {&#xa;jTabbedPanel.setSelectedIndex(3);&#xa;});"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JButton" name="buttonCreatePlayList">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Crear Playlist"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonCreatePlayList.addActionListener((e) -&gt; {&#xa;        int count =jTabbedPanel.getTabCount();&#xa;jTabbedPanel.addTab(&quot;tab&quot;+count, new javax.swing.JPanel());&#xa;jTabbedPanel.setSelectedIndex(count);&#xa;});"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JButton" name="buttonLibrary">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Tu Biblioteca"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonLibrary.addActionListener((e) -&gt; {&#xa;jTabbedPanel.setSelectedIndex(2);&#xa;});"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JButton" name="buttonSearch">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Buscar"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePre" type="java.lang.String" value="buttonSearch.addActionListener((e) -&gt; {&#xa;jTabbedPanel.setSelectedIndex(1);&#xa;});"/>
-                  </AuxValues>
-                </Component>
-                <Component class="javax.swing.JButton" name="buttonHome">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="Inicio"/>
-                  </Properties>
-                  <AuxValues>
-                    <AuxValue name="JavaCodeGenerator_InitCodePost" type="java.lang.String" value="buttonHome.addActionListener((e) -&gt; {&#xa;jTabbedPanel.setSelectedIndex(0);&#xa;});"/>
-                  </AuxValues>
-                </Component>
-              </SubComponents>
-            </Container>
-            <Container class="javax.swing.JPanel" name="panelLeftDownBody">
+                <Container class="javax.swing.JPanel" name="whereLoadButtonsOfPlaylist">
 
-              <Layout>
-                <DimensionLayout dim="0">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-                <DimensionLayout dim="1">
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                  </Group>
-                </DimensionLayout>
-              </Layout>
+                  <Layout>
+                    <DimensionLayout dim="0">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="131" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                    <DimensionLayout dim="1">
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <EmptySpace min="0" pref="325" max="32767" attributes="0"/>
+                      </Group>
+                    </DimensionLayout>
+                  </Layout>
+                </Container>
+              </SubComponents>
             </Container>
           </SubComponents>
         </Container>
@@ -506,12 +490,15 @@
             <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="99" green="99" red="99" type="rgb"/>
             </Property>
+            <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
+              <Color id="Default Cursor"/>
+            </Property>
           </Properties>
 
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <EmptySpace min="0" pref="264" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="169" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -526,7 +513,7 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jTabbedPanel" alignment="0" max="32767" attributes="0"/>
+                  <Component id="jTabbedPanel" alignment="0" pref="0" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
@@ -564,12 +551,12 @@
                   <Layout>
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="667" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                     <DimensionLayout dim="1">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jScrollPane1" alignment="0" pref="556" max="32767" attributes="0"/>
+                          <Component id="jScrollPane1" alignment="0" pref="555" max="32767" attributes="0"/>
                       </Group>
                     </DimensionLayout>
                   </Layout>
@@ -586,7 +573,7 @@
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="labelHomeTitle" min="-2" pref="140" max="-2" attributes="0"/>
-                                      <EmptySpace pref="361" max="32767" attributes="0"/>
+                                      <EmptySpace pref="481" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -595,7 +582,7 @@
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                                       <Component id="labelHomeTitle" min="-2" max="-2" attributes="0"/>
-                                      <EmptySpace pref="645" max="32767" attributes="0"/>
+                                      <EmptySpace pref="657" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                             </DimensionLayout>
@@ -630,7 +617,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="labelSearchTitle" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="357" max="32767" attributes="0"/>
+                              <EmptySpace pref="477" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -639,7 +626,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="labelSearchTitle" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="479" max="32767" attributes="0"/>
+                              <EmptySpace pref="478" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -670,7 +657,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="labelPlayListTitle" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="407" max="32767" attributes="0"/>
+                              <EmptySpace pref="527" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -679,7 +666,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="labelPlayListTitle" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="479" max="32767" attributes="0"/>
+                              <EmptySpace pref="478" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -710,7 +697,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="labelFavoritesTitle" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="371" max="32767" attributes="0"/>
+                              <EmptySpace pref="491" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -719,7 +706,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="labelFavoritesTitle" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="479" max="32767" attributes="0"/>
+                              <EmptySpace pref="478" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -750,7 +737,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="labelEpisodesTitle" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="363" max="32767" attributes="0"/>
+                              <EmptySpace pref="483" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -759,7 +746,7 @@
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace min="-2" pref="30" max="-2" attributes="0"/>
                               <Component id="labelEpisodesTitle" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace pref="479" max="32767" attributes="0"/>
+                              <EmptySpace pref="478" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
