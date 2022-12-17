@@ -31,9 +31,11 @@ public class PanelPlayerOptions extends JPanel {
         buttonPlayerRepeat.setText("O");
 
 
-        setBackground(Color.red);
 
 //        Config of this panel
+
+
+        setBackground(new Color(18, 18, 18));
 
         javax.swing.GroupLayout panelPlayerOptionsLayout = new javax.swing.GroupLayout(this);
         setLayout(panelPlayerOptionsLayout);
@@ -43,8 +45,8 @@ public class PanelPlayerOptions extends JPanel {
                                 .addContainerGap(13, Short.MAX_VALUE)
                                 .addGroup(panelPlayerOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPlayerOptionsLayout.createSequentialGroup()
-                                                .addComponent(jSliderMusicBar, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addGap(8, 8, 8))
+                                                .addComponent(jSliderMusicBar, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(18, 18, 18))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPlayerOptionsLayout.createSequentialGroup()
                                                 .addComponent(buttonPlayerRandomMusic, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(18, 18, 18)
@@ -55,7 +57,7 @@ public class PanelPlayerOptions extends JPanel {
                                                 .addComponent(buttonPlayerNextSong, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(buttonPlayerRepeat)
-                                                .addGap(82, 82, 82))))
+                                                .addGap(70, 70, 70))))
         );
         panelPlayerOptionsLayout.setVerticalGroup(
                 panelPlayerOptionsLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -69,7 +71,7 @@ public class PanelPlayerOptions extends JPanel {
                                         .addComponent(buttonPlayerRepeat))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSliderMusicBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(9, 9, 9))
+                                .addGap(17, 17, 17))
         );
 
     }
