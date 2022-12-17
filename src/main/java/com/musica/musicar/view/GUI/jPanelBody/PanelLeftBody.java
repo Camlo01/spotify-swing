@@ -61,7 +61,6 @@ public class PanelLeftBody extends javax.swing.JPanel {
 //            PANEL
             JTabPlaylist jPanelPlayList = new JTabPlaylist(labelPlayListTittle);
 
-
             jTabbedPanel.addTab("play" + numberOfPlayList, jPanelPlayList);
             jTabbedPanel.setSelectedIndex(count);
 
@@ -74,7 +73,6 @@ public class PanelLeftBody extends javax.swing.JPanel {
             buttonToAdd.setVisible(true);
 
         });
-
 
 //        Config whereLoadButtonsOfPlaylist
 
@@ -140,21 +138,14 @@ public class PanelLeftBody extends javax.swing.JPanel {
     }
 
     /**
-     * Function that apply general configuration to a button
+     * Function that apply general configuration to a button of different tabs in the JPannedPane
      *
-     * @param button   to configurate
+     * @param button   to configure
      * @param title    to set in the button
      * @param indexTab tab to select in jTabbedPanel
      */
     private void setConfigurationsButton(JButton button, String title, int indexTab) {
-        button.setText(title);
-        button.setFont(new java.awt.Font("Dialog", 1, 14));
-        button.setFocusable(false);
-        button.setFocusPainted(false);
-        button.setBackground(Color.black);
-        button.setForeground(new Color(179, 179, 179));
-        button.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        button.setContentAreaFilled(false);
+        setGenericButtonConfiguration(button, title);
         button.addActionListener((e) -> {
             jTabbedPanel.setSelectedIndex(indexTab);
         });
@@ -175,18 +166,11 @@ public class PanelLeftBody extends javax.swing.JPanel {
      * Function that apply general configuration to a button
      * without indicate what tab select
      *
-     * @param button to configurate
+     * @param button to configure
      * @param title  to set in the button
      */
     private void setConfigurationsButton(JButton button, String title) {
-        button.setText(title);
-        button.setFont(new java.awt.Font("Dialog", 1, 14));
-        button.setFocusable(false);
-        button.setFocusPainted(false);
-        button.setBackground(Color.black);
-        button.setForeground(new Color(179, 179, 179));
-        button.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        button.setContentAreaFilled(false);
+        setGenericButtonConfiguration(button, title);
         button.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 buttonStylesMouseMoved(evt, button);
@@ -200,14 +184,8 @@ public class PanelLeftBody extends javax.swing.JPanel {
     }
 
     private void setConfigurationButtonToAdd(JButton buttonToAdd, String title, int tabToOpen, int y) {
-        buttonToAdd.setText(title);
-        buttonToAdd.setFont(new java.awt.Font("Dialog", 1, 14));
-        buttonToAdd.setFocusable(false);
-        buttonToAdd.setFocusPainted(false);
-        buttonToAdd.setBackground(Color.black);
-        buttonToAdd.setForeground(new Color(179, 179, 179));
-        buttonToAdd.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
-        buttonToAdd.setContentAreaFilled(false);
+        setGenericButtonConfiguration(buttonToAdd, title);
+
         buttonToAdd.addMouseMotionListener(new MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 buttonStylesMouseMoved(evt, buttonToAdd);
@@ -233,6 +211,24 @@ public class PanelLeftBody extends javax.swing.JPanel {
     }
 
     /**
+     * Configuration for every button
+     *
+     * @param button to apply styles
+     * @param title  of the button
+     */
+    private void setGenericButtonConfiguration(JButton button, String title) {
+        button.setText(title);
+        button.setFont(new java.awt.Font("Dialog", 1, 14));
+        button.setFocusable(false);
+        button.setFocusPainted(false);
+        button.setBackground(Color.black);
+        button.setForeground(new Color(179, 179, 179));
+        button.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        button.setContentAreaFilled(false);
+    }
+
+
+    /**
      * Apply styles to button when mouse is over
      *
      * @param evt    action
@@ -252,13 +248,20 @@ public class PanelLeftBody extends javax.swing.JPanel {
         button.setForeground(new Color(179, 179, 179));
     }
 
+    /**
+     * Function that evaluates if the click pressed is the right one
+     *
+     * @param e event to evaluate
+     * @return true if it is
+     */
     private boolean mouseEventRight(MouseEvent e) {
         return (e.getButton() == MouseEvent.BUTTON3);
-
     }
 
     /**
-     * @param button
+     * Function that displays a menu to execute on the button of a playlist
+     *
+     * @param button to add pop up menu
      */
     public void functionOfMenu(JButton button) {
         JPopupMenu menu = new JPopupMenu("Menu");
@@ -333,7 +336,7 @@ public class PanelLeftBody extends javax.swing.JPanel {
     /**
      * Update whereLoadButtonsOfPlaylist JPanel after add a new button
      *
-     * @param newSize
+     * @param newSize value to increase the size of the panel
      */
     private void updatePanelPlaylistButtons(int newSize) {
         javax.swing.GroupLayout whereLoadButtonsOfPlaylistLayout = new javax.swing.GroupLayout(whereLoadButtonsOfPlaylist);
