@@ -14,17 +14,18 @@ public class PanelPlayerVolumen extends JPanel {
 
     private void initComponents() {
 
-        setBackground(Color.blue);
 //        Config this panel
+
+        setBackground(new Color(18, 18, 18));
 
         javax.swing.GroupLayout panelPlayerVolumenLayout = new javax.swing.GroupLayout(this);
         setLayout(panelPlayerVolumenLayout);
         panelPlayerVolumenLayout.setHorizontalGroup(
                 panelPlayerVolumenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPlayerVolumenLayout.createSequentialGroup()
-                                .addContainerGap(114, Short.MAX_VALUE)
+                                .addContainerGap(111, Short.MAX_VALUE)
                                 .addComponent(jSliderVolumenBar, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(16, 16, 16)
+                                .addGap(25, 25, 25)
                         )
         );
         panelPlayerVolumenLayout.setVerticalGroup(
@@ -32,7 +33,7 @@ public class PanelPlayerVolumen extends JPanel {
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelPlayerVolumenLayout.createSequentialGroup()
                                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jSliderVolumenBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(22, 22, 22))
+                                .addGap(32, 32, 32))
         );
 
     }
