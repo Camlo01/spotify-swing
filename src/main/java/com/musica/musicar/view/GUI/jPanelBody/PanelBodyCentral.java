@@ -1,11 +1,17 @@
 package com.musica.musicar.view.GUI.jPanelBody;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class PanelBodyCentral extends javax.swing.JPanel {
 
     //    Panel central
     public static JTabbedPane jTabbedPanel = new JTabbedPane();
+
+
+    //  Gradient configuration
+    private Color darkBlack = new Color(16, 16, 16);
+    private Color lightBlack = new Color(34, 34, 34);
 
 
     //   TAB 1
@@ -59,8 +65,12 @@ public class PanelBodyCentral extends javax.swing.JPanel {
 
         jTabbedPanel.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        jTabbedPanel.setBackground(Color.black);
 
         // Config size of jPanelHome
+        setBackground(Color.black);
+
+
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
