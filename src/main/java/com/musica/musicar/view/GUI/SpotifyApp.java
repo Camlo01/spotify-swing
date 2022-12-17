@@ -39,6 +39,7 @@ public class SpotifyApp extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 SpotifyApp app = new SpotifyApp();
+                app.setTitle("Spotify");
                 app.setVisible(true);
             }
         });
