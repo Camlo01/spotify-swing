@@ -1,6 +1,10 @@
 package com.musica.musicar.view.GUI.jPanelBody;
 
+import com.musica.musicar.view.GUI.jPanelBody.mold.JTabPlaylist;
+
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.*;
 
 public class PanelLeftBody extends javax.swing.JPanel {
 
@@ -11,7 +15,7 @@ public class PanelLeftBody extends javax.swing.JPanel {
     private JTabbedPane jTabbedPanel = PanelBodyCentral.jTabbedPanel;
 
 
-    //    Panel left
+    //    Panel Up
     private javax.swing.JButton buttonHome = new JButton();
     private javax.swing.JButton buttonSearch = new JButton();
     private javax.swing.JButton buttonLibrary = new JButton();
@@ -19,7 +23,8 @@ public class PanelLeftBody extends javax.swing.JPanel {
     private javax.swing.JButton buttonFavorites = new JButton();
     private javax.swing.JButton buttonEpisodes = new JButton();
     private JSeparator jSeparator1 = new JSeparator();
-    //    Panel - left down
+
+    //    Panel Down
     private JScrollPane jScrolPanelPlayLists = new JScrollPane();
     private JPanel whereLoadButtonsOfPlaylist = new JPanel();
 
@@ -37,78 +42,43 @@ public class PanelLeftBody extends javax.swing.JPanel {
 
 //        Configuration buttons
 
-        buttonHome.setText("Inicio");
-        buttonHome.addActionListener((e) -> {
-            jTabbedPanel.setSelectedIndex(0);
-        });
-
-        buttonSearch.setText("Buscar");
-        buttonSearch.addActionListener((e) -> {
-            jTabbedPanel.setSelectedIndex(1);
-        });
-
-        buttonLibrary.setText("Tu Biblioteca");
-        buttonLibrary.addActionListener((e) -> {
-            jTabbedPanel.setSelectedIndex(2);
-        });
-
-        buttonCreatePlayList.setText("Crear Playlist");
+        setConfigurationsButton(buttonHome, "Inicio", 0);
+        setConfigurationsButton(buttonSearch, "Buscar", 1);
+        setConfigurationsButton(buttonLibrary, "Tu Biblioteca", 2);
+        setConfigurationsButton(buttonFavorites, "Tus me gusta", 3);
+        setConfigurationsButton(buttonEpisodes, "Tus episodios", 4);
+        setConfigurationsButton(buttonCreatePlayList, "Crear Playlist");
+//        function create Playlist
         buttonCreatePlayList.addActionListener((e) -> {
             int count = jTabbedPanel.getTabCount();
             int numberOfPlayList = count - 4;
-            JPanel jPanelPlayList = new javax.swing.JPanel();
+
+//            LABEL
             JLabel labelPlayListTittle = new javax.swing.JLabel();
-
-
             labelPlayListTittle.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
             labelPlayListTittle.setText("PlayList " + numberOfPlayList);
 
-            javax.swing.GroupLayout jPanelPlayListLayout = new javax.swing.GroupLayout(jPanelPlayList);
-            jPanelPlayList.setLayout(jPanelPlayListLayout);
-            jPanelPlayListLayout.setHorizontalGroup(
-                    jPanelPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelPlayListLayout.createSequentialGroup()
-                                    .addGap(30, 30, 30)
-                                    .addComponent(labelPlayListTittle)
-                                    .addContainerGap(477, Short.MAX_VALUE))
-            );
-            jPanelPlayListLayout.setVerticalGroup(
-                    jPanelPlayListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanelPlayListLayout.createSequentialGroup()
-                                    .addGap(30, 30, 30)
-                                    .addComponent(labelPlayListTittle)
-                                    .addContainerGap(478, Short.MAX_VALUE))
-            );
+//            PANEL
+            JTabPlaylist jPanelPlayList = new JTabPlaylist(labelPlayListTittle);
+
 
             jTabbedPanel.addTab("play" + numberOfPlayList, jPanelPlayList);
             jTabbedPanel.setSelectedIndex(count);
 
-            JButton buttonToAdd = new JButton("PlayList #" + numberOfPlayList);
-            buttonToAdd.setBounds(0, yWhereLoadPlayList, 131, 30);
-            buttonToAdd.addActionListener(e1 -> {
-                jTabbedPanel.setSelectedIndex(count);
-            });
-
+            JButton buttonToAdd = new JButton();
+            String buttonNameByDefect = "PlayList #" + numberOfPlayList;
+            setConfigurationButtonToAdd(buttonToAdd, buttonNameByDefect, count, yWhereLoadPlayList);
             yWhereLoadPlayList += 30;
             whereLoadButtonsOfPlaylist.add(buttonToAdd);
-
-            javax.swing.GroupLayout whereLoadButtonsOfPlaylistLayout = new javax.swing.GroupLayout(whereLoadButtonsOfPlaylist);
-            whereLoadButtonsOfPlaylist.setLayout(whereLoadButtonsOfPlaylistLayout);
-            whereLoadButtonsOfPlaylistLayout.setHorizontalGroup(
-                    whereLoadButtonsOfPlaylistLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                            .addGap(0, 131, Short.MAX_VALUE)
-            );
-            jScrolPanelPlayLists.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-
-            whereLoadButtonsOfPlaylistLayout.setVerticalGroup(
-                    whereLoadButtonsOfPlaylistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGap(0, yWhereLoadPlayList, Short.MAX_VALUE)
-            );
+            updatePanelPlaylistButtons(yWhereLoadPlayList);
             buttonToAdd.setVisible(true);
 
         });
 
+
 //        Config whereLoadButtonsOfPlaylist
+
+        whereLoadButtonsOfPlaylist.setBackground(Color.black);
 
         javax.swing.GroupLayout whereLoadButtonsOfPlaylistLayout = new javax.swing.GroupLayout(whereLoadButtonsOfPlaylist);
         whereLoadButtonsOfPlaylist.setLayout(whereLoadButtonsOfPlaylistLayout);
@@ -118,20 +88,9 @@ public class PanelLeftBody extends javax.swing.JPanel {
         );
         whereLoadButtonsOfPlaylistLayout.setVerticalGroup(
                 whereLoadButtonsOfPlaylistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 325, Short.MAX_VALUE)
+                        .addGap(0, 300, Short.MAX_VALUE)
         );
-
         jScrolPanelPlayLists.setViewportView(whereLoadButtonsOfPlaylist);
-
-        buttonFavorites.setText("Tus me gusta");
-        buttonFavorites.addActionListener((e) -> {
-            jTabbedPanel.setSelectedIndex(3);
-        });
-
-        buttonEpisodes.setText("Tus episodios");
-        buttonEpisodes.addActionListener((e) -> {
-            jTabbedPanel.setSelectedIndex(4);
-        });
 
 
 //        config this panel
@@ -179,4 +138,217 @@ public class PanelLeftBody extends javax.swing.JPanel {
         );
 
     }
+
+    /**
+     * Function that apply general configuration to a button
+     *
+     * @param button   to configurate
+     * @param title    to set in the button
+     * @param indexTab tab to select in jTabbedPanel
+     */
+    private void setConfigurationsButton(JButton button, String title, int indexTab) {
+        button.setText(title);
+        button.setFont(new java.awt.Font("Dialog", 1, 14));
+        button.setFocusable(false);
+        button.setFocusPainted(false);
+        button.setBackground(Color.black);
+        button.setForeground(new Color(179, 179, 179));
+        button.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        button.setContentAreaFilled(false);
+        button.addActionListener((e) -> {
+            jTabbedPanel.setSelectedIndex(indexTab);
+        });
+        button.addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                buttonStylesMouseMoved(evt, button);
+            }
+        });
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonStylesMouseExited(evt, button);
+            }
+        });
+        button.setVisible(true);
+    }
+
+    /**
+     * Function that apply general configuration to a button
+     * without indicate what tab select
+     *
+     * @param button to configurate
+     * @param title  to set in the button
+     */
+    private void setConfigurationsButton(JButton button, String title) {
+        button.setText(title);
+        button.setFont(new java.awt.Font("Dialog", 1, 14));
+        button.setFocusable(false);
+        button.setFocusPainted(false);
+        button.setBackground(Color.black);
+        button.setForeground(new Color(179, 179, 179));
+        button.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        button.setContentAreaFilled(false);
+        button.addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                buttonStylesMouseMoved(evt, button);
+            }
+        });
+        button.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonStylesMouseExited(evt, button);
+            }
+        });
+    }
+
+    private void setConfigurationButtonToAdd(JButton buttonToAdd, String title, int tabToOpen, int y) {
+        buttonToAdd.setText(title);
+        buttonToAdd.setFont(new java.awt.Font("Dialog", 1, 14));
+        buttonToAdd.setFocusable(false);
+        buttonToAdd.setFocusPainted(false);
+        buttonToAdd.setBackground(Color.black);
+        buttonToAdd.setForeground(new Color(179, 179, 179));
+        buttonToAdd.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4));
+        buttonToAdd.setContentAreaFilled(false);
+        buttonToAdd.addMouseMotionListener(new MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                buttonStylesMouseMoved(evt, buttonToAdd);
+            }
+        });
+        buttonToAdd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                buttonStylesMouseExited(evt, buttonToAdd);
+            }
+        });
+        buttonToAdd.setBounds(0, yWhereLoadPlayList, 131, 30);
+        buttonToAdd.addActionListener(e1 -> {
+            jTabbedPanel.setSelectedIndex(tabToOpen);
+        });
+        buttonToAdd.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (mouseEventRight(e)) {
+                    functionOfMenu(buttonToAdd);
+                }
+            }
+        });
+    }
+
+    /**
+     * Apply styles to button when mouse is over
+     *
+     * @param evt    action
+     * @param button to apply styles
+     */
+    private void buttonStylesMouseMoved(MouseEvent evt, JButton button) {
+        button.setForeground(Color.WHITE);
+    }
+
+    /**
+     * Reapplies normal styles before mouse over
+     *
+     * @param evt    action
+     * @param button to apply styles
+     */
+    private void buttonStylesMouseExited(MouseEvent evt, JButton button) {
+        button.setForeground(new Color(179, 179, 179));
+    }
+
+    private boolean mouseEventRight(MouseEvent e) {
+        return (e.getButton() == MouseEvent.BUTTON3);
+
+    }
+
+    /**
+     * @param button
+     */
+    public void functionOfMenu(JButton button) {
+        JPopupMenu menu = new JPopupMenu("Menu");
+        menu.add(new JMenuItem(new AbstractAction("Agregar a la fila de reproducción") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("You pressed a jMenuItem");
+            }
+        }));
+        menu.add(new JMenuItem(new AbstractAction("Ir a la radio de playlist") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("You pressed a jMenuItem");
+            }
+        }));
+        menu.addSeparator();
+        menu.add(new JMenuItem(new AbstractAction("Agregar al perfil") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("You pressed a jMenuItem");
+            }
+        }));
+        menu.addSeparator();
+        menu.add(new JMenuItem(new AbstractAction("Reportar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("You pressed a jMenuItem");
+            }
+        }));
+        menu.add(new JMenuItem(new AbstractAction("Eliminar de Tu biblioteca") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("You pressed a jMenuItem");
+            }
+        }));
+        menu.addSeparator();
+        menu.add(new JMenuItem(new AbstractAction("Descargar") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("You pressed a jMenuItem");
+            }
+        }));
+        menu.add(new JMenuItem(new AbstractAction("Crear playlist") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("You pressed a jMenuItem");
+            }
+        }));
+        menu.add(new JMenuItem(new AbstractAction("Crear carpeta") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("You pressed a jMenuItem");
+            }
+        }));
+        menu.add(new JMenuItem(new AbstractAction("Agregar a otra playlist") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("You pressed a jMenuItem");
+            }
+        }));
+        menu.addSeparator();
+        menu.add(new JMenuItem(new AbstractAction("Compartir") {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("You pressed a jMenuItem");
+            }
+        }));
+        menu.show(button, button.getWidth() / 2, button.getHeight() / 2);
+    }
+
+
+    /**
+     * Update whereLoadButtonsOfPlaylist JPanel after add a new button
+     *
+     * @param newSize
+     */
+    private void updatePanelPlaylistButtons(int newSize) {
+        javax.swing.GroupLayout whereLoadButtonsOfPlaylistLayout = new javax.swing.GroupLayout(whereLoadButtonsOfPlaylist);
+        whereLoadButtonsOfPlaylist.setLayout(whereLoadButtonsOfPlaylistLayout);
+        whereLoadButtonsOfPlaylistLayout.setHorizontalGroup(
+                whereLoadButtonsOfPlaylistLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addGap(0, 131, Short.MAX_VALUE)
+        );
+        jScrolPanelPlayLists.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
+        whereLoadButtonsOfPlaylistLayout.setVerticalGroup(
+                whereLoadButtonsOfPlaylistLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(0, newSize, Short.MAX_VALUE)
+        );
+    }
+
+
 }
