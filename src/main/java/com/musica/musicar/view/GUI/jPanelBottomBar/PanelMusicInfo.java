@@ -1,7 +1,10 @@
 package com.musica.musicar.view.GUI.jPanelBottomBar;
 
-import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.font.TextAttribute;
+import java.util.HashMap;
+import java.util.Map;
 
 public class PanelMusicInfo extends javax.swing.JPanel {
 
@@ -17,12 +20,37 @@ public class PanelMusicInfo extends javax.swing.JPanel {
 
     private void initComponents() {
 
-//        lineas 201
         labelPlayerTitleSong.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         labelPlayerTitleSong.setText("Title song");
+        labelPlayerTitleSong.setForeground(new Color(231, 231, 231));
+        labelPlayerTitleSong.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                labelPlayerTitleSongMouseMoved(evt);
+            }
+        });
+        labelPlayerTitleSong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelPlayerTitleSongMouseExited(evt);
+            }
+        });
 
-//          lineas 203 - 216
-        panelPlayerCoverSong.setBackground(new java.awt.Color(102, 102, 0));
+//        Configuration artist configuration
+
+        labelPlayerArtistSong.setText("artist");
+        labelPlayerArtistSong.setForeground(new Color(154, 154, 154));
+        labelPlayerArtistSong.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                labelPlayerArtistSongMouseMoved(evt);
+            }
+        });
+        labelPlayerArtistSong.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                labelPlayerArtistSongMouseExited(evt);
+            }
+        });
+
+
+        panelPlayerCoverSong.setBackground(new java.awt.Color(0, 255, 24));
         panelPlayerCoverSong.setPreferredSize(new java.awt.Dimension(30, 30));
 
         javax.swing.GroupLayout panelPlayerCoverSongLayout = new javax.swing.GroupLayout(panelPlayerCoverSong);
@@ -36,12 +64,10 @@ public class PanelMusicInfo extends javax.swing.JPanel {
                         .addGap(0, 57, Short.MAX_VALUE)
         );
 
-//        Linea 218
-        labelPlayerArtistSong.setText("artist");
 
-        setBackground(Color.CYAN);
+//        Config this panel
+        setBackground(new Color(18, 18, 18));
 
-//        Lineas 219 - 245
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(this);
         setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -69,4 +95,31 @@ public class PanelMusicInfo extends javax.swing.JPanel {
                                 .addContainerGap())
         );
     }
+
+
+    //    labelPlayerArtistSong
+    private void labelPlayerArtistSongMouseMoved(MouseEvent evt) {
+        labelPlayerArtistSong.setForeground(new Color(231, 231, 231));
+    }
+
+    private void labelPlayerArtistSongMouseExited(MouseEvent evt) {
+        labelPlayerArtistSong.setForeground(new Color(154, 154, 154));
+    }
+
+    //    labelPlayerTitleSong
+    private void labelPlayerTitleSongMouseMoved(MouseEvent evt) {
+        Font font = labelPlayerTitleSong.getFont();
+        Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
+        attributes.put(TextAttribute.UNDERLINE, TextAttribute.UNDERLINE_ON);
+        labelPlayerTitleSong.setFont(font.deriveFont(attributes));
+    }
+
+    private void labelPlayerTitleSongMouseExited(MouseEvent evt) {
+        Font font = labelPlayerTitleSong.getFont();
+        Map<TextAttribute, Object> attributes = new HashMap<>(font.getAttributes());
+        attributes.put(TextAttribute.UNDERLINE, -1);
+        labelPlayerTitleSong.setFont(font.deriveFont(attributes));
+    }
+
+
 }
