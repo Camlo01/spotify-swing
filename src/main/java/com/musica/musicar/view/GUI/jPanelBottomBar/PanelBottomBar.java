@@ -27,10 +27,10 @@ public class PanelBottomBar extends javax.swing.JPanel {
 
 //        Configuration of this panel
 
-        setBackground(new java.awt.Color(51, 51, 51));
 
 
 //        Configuration of this panel
+        setBackground(new java.awt.Color(18, 18, 18));
 
         javax.swing.GroupLayout panelBottomBarLayout = new javax.swing.GroupLayout(this);
         setLayout(panelBottomBarLayout);
