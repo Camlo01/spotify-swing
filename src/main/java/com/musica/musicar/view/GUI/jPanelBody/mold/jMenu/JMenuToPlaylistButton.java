@@ -71,7 +71,6 @@ public class JMenuToPlaylistButton extends JPopupMenu {
 //        Configuring this JPopUpMenu
         setBackground(Color.black);
 
-
         show(buttonToAddMenu, buttonToAddMenu.getWidth() / 2, buttonToAddMenu.getHeight() / 2);
     }
 
