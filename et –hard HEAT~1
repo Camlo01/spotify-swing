@@ -1,0 +1,103 @@
+[33mcommit e2c5e44ab3b65f23d40530914d4de18632e3d4e2[m
+Author: camlo01 <camilobeltran174@gmail.com>
+Date:   Tue Dec 20 15:42:18 2022 -0500
+
+    code refactoring, separating the menu on the playlist buttons in a separate file
+
+[1mdiff --git a/src/main/java/com/musica/musicar/view/GUI/jPanelBody/PanelLeftBody.java b/src/main/java/com/musica/musicar/view/GUI/jPanelBody/PanelLeftBody.java[m
+[1mindex 7cabb28..442fc73 100644[m
+[1m--- a/src/main/java/com/musica/musicar/view/GUI/jPanelBody/PanelLeftBody.java[m
+[1m+++ b/src/main/java/com/musica/musicar/view/GUI/jPanelBody/PanelLeftBody.java[m
+[36m@@ -1,6 +1,7 @@[m
+ package com.musica.musicar.view.GUI.jPanelBody;[m
+ [m
+ import com.musica.musicar.view.GUI.jPanelBody.mold.JTabPlaylist;[m
+[32m+[m[32mimport com.musica.musicar.view.GUI.jPanelBody.mold.jMenu.JMenuToPlaylistButton;[m
+ [m
+ import javax.swing.*;[m
+ import java.awt.*;[m
+[36m@@ -204,7 +205,7 @@[m [mpublic class PanelLeftBody extends javax.swing.JPanel {[m
+             @Override[m
+             public void mouseClicked(MouseEvent e) {[m
+                 if (mouseEventRight(e)) {[m
+[31m-                    functionOfMenu(buttonToAdd);[m
+[32m+[m[32m                    menuPlaylistButton(buttonToAdd);[m
+                 }[m
+             }[m
+         });[m
+[36m@@ -263,73 +264,8 @@[m [mpublic class PanelLeftBody extends javax.swing.JPanel {[m
+      *[m
+      * @param button to add pop up menu[m
+      */[m
+[31m-    public void functionOfMenu(JButton button) {[m
+[31m-        JPopupMenu menu = new JPopupMenu("Menu");[m
+[31m-        menu.add(new JMenuItem(new AbstractAction("Agregar a la fila de reproducción") {[m
+[31m-            @Override[m
+[31m-            public void actionPerformed(ActionEvent e) {[m
+[31m-                System.out.println("You pressed a jMenuItem");[m
+[31m-            }[m
+[31m-        }));[m
+[31m-        menu.add(new JMenuItem(new AbstractAction("Ir a la radio de playlist") {[m
+[31m-            @Override[m
+[31m-            public void actionPerformed(ActionEvent e) {[m
+[31m-                System.out.println("You pressed a jMenuItem");[m
+[31m-            }[m
+[31m-        }));[m
+[31m-        menu.addSeparator();[m
+[31m-        menu.add(new JMenuItem(new AbstractAction("Agregar al perfil") {[m
+[31m-            @Override[m
+[31m-            public void actionPerformed(ActionEvent e) {[m
+[31m-                System.out.println("You pressed a jMenuItem");[m
+[31m-            }[m
+[31m-        }));[m
+[31m-        menu.addSeparator();[m
+[31m-        menu.add(new JMenuItem(new AbstractAction("Reportar") {[m
+[31m-            @Override[m
+[31m-            public void actionPerformed(ActionEvent e) {[m
+[31m-                System.out.println("You pressed a jMenuItem");[m
+[31m-            }[m
+[31m-        }));[m
+[31m-        menu.add(new JMenuItem(new AbstractAction("Eliminar de Tu biblioteca") {[m
+[31m-            @Override[m
+[31m-            public void actionPerformed(ActionEvent e) {[m
+[31m-                System.out.println("You pressed a jMenuItem");[m
+[31m-            }[m
+[31m-        }));[m
+[31m-        menu.addSeparator();[m
+[31m-        menu.add(new JMenuItem(new AbstractAction("Descargar") {[m
+[31m-            @Override[m
+[31m-            public void actionPerformed(ActionEvent e) {[m
+[31m-                System.out.println("You pressed a jMenuItem");[m
+[31m-            }[m
+[31m-        }));[m
+[31m-        menu.add(new JMenuItem(new AbstractAction("Crear playlist") {[m
+[31m-            @Override[m
+[31m-            public void actionPerformed(ActionEvent e) {[m
+[31m-                System.out.println("You pressed a jMenuItem");[m
+[31m-            }[m
+[31m-        }));[m
+[31m-        menu.add(new JMenuItem(new AbstractAction("Crear carpeta") {[m
+[31m-            @Override[m
+[31m-            public void actionPerformed(ActionEvent e) {[m
+[31m-                System.out.println("You pressed a jMenuItem");[m
+[31m-            }[m
+[31m-        }));[m
+[31m-        menu.add(new JMenuItem(new AbstractAction("Agregar a otra playlist") {[m
+[31m-            @Override[m
+[31m-            public void actionPerformed(ActionEvent e) {[m
+[31m-                System.out.println("You pressed a jMenuItem");[m
+[31m-            }[m
+[31m-        }));[m
+[31m-        menu.addSeparator();[m
+[31m-        menu.add(new JMenuItem(new AbstractAction("Compartir") {[m
+[31m-            @Override[m
+[31m-            public void actionPerformed(ActionEvent e) {[m
+[31m-                System.out.println("You pressed a jMenuItem");[m
+[31m-            }[m
+[31m-        }));[m
+[31m-        menu.show(button, button.getWidth() / 2, button.getHeight() / 2);[m
+[32m+[m[32m    public void menuPlaylistButton(JButton button) {[m
+[32m+[m[32m        JMenuToPlaylistButton menu = new JMenuToPlaylistButton(button);[m
+     }[m
+ [m
+ [m
