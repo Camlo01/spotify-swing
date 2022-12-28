@@ -1,5 +1,7 @@
 package com.musica.musicar.view.GUI.jPanelBody.mold.jMenu;
 
+import com.musica.musicar.view.GUI.jPanelBody.PanelLeftBody;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -10,11 +12,11 @@ public class JMenuToPlaylistButton extends JPopupMenu {
     JMenuItem addToPlayQueue, playlistRadio, addToProfile, report, deleteFromLibrary, download, createPlaylist,
             createCarpet, addToOtherPlaylist, share;
 
-    public JMenuToPlaylistButton(JButton buttonToAddMenu) {
-        initComponents(buttonToAddMenu);
+    public JMenuToPlaylistButton() {
+        initComponents();
     }
 
-    public void initComponents(JButton buttonToAddMenu) {
+    public void initComponents() {
 
 //        Initializing menu items
         addToPlayQueue = new JMenuItem("Agregar a la fila de reproducción");
@@ -71,7 +73,6 @@ public class JMenuToPlaylistButton extends JPopupMenu {
 //        Configuring this JPopUpMenu
         setBackground(Color.black);
 
-        show(buttonToAddMenu, buttonToAddMenu.getWidth() / 2, buttonToAddMenu.getHeight() / 2);
     }
 
     /**
