@@ -71,7 +71,7 @@ public class PanelPlayerOptions extends JPanel {
                                         .addComponent(buttonPlayerRepeat))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSliderMusicBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17))
+                                .addGap(12, 12, 12))
         );
 
     }
