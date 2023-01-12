@@ -28,8 +28,6 @@ public class PanelLeftBody extends javax.swing.JPanel {
     private final javax.swing.JButton buttonFavorites = new JButton();
     private final javax.swing.JButton buttonEpisodes = new JButton();
     private final JSeparator jSeparator1 = new JSeparator();
-    private final JButton buttonOptions = new JButton();
-    private final MenuOptions popUpMenuOptions = new MenuOptions(buttonOptions);
 
     //    Panel Down
     private final JScrollPane jScrollPanelPlayLists = new JScrollPane();
@@ -60,18 +58,6 @@ public class PanelLeftBody extends javax.swing.JPanel {
         setConfigurationsButton(buttonFavorites, "Tus me gusta", "4");
         setConfigurationsButton(buttonEpisodes, "Tus episodios", "5");
         setConfigurationsButton(buttonCreatePlayList, "Crear Playlist", null);
-//        setConfigurationsButton(buttonOptions, "...", null);
-
-
-        buttonOptions.setText("...");
-        buttonOptions.setFont(new java.awt.Font("Dialog", 1, 26));
-        buttonOptions.setFocusable(false);
-        buttonOptions.setFocusPainted(false);
-        buttonOptions.setBackground(Color.black);
-        buttonOptions.setForeground(Color.white);
-        buttonOptions.setContentAreaFilled(false);
-        buttonOptions.setBorder(BorderFactory.createEmptyBorder(4, 4, 1, 4));
-        setConfigurationPopUpMenu();
 
 
 //        logic of creating a playlist
@@ -102,6 +88,7 @@ public class PanelLeftBody extends javax.swing.JPanel {
 //        panelLeftBody Configuration
 
         setBackground(new java.awt.Color(0, 0, 0));
+//        setMinimumSize(new Dimension(107, 524));
 
         javax.swing.GroupLayout panelLeftBodyLayout = new javax.swing.GroupLayout(this);
         setLayout(panelLeftBodyLayout);
@@ -118,15 +105,14 @@ public class PanelLeftBody extends javax.swing.JPanel {
                                         .addComponent(buttonLibrary, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(buttonSearch, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(buttonHome, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(buttonOptions, GroupLayout.Alignment.LEADING, 35, 35, 35))
-                                .addGap(9, 9, 9))
+                                        .addGap(9, 9, 9)))
         );
 //        buttonOptions
         panelLeftBodyLayout.setVerticalGroup(
                 panelLeftBodyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelLeftBodyLayout.createSequentialGroup()
-                                .addComponent(buttonOptions, 40, 40, 40)
                                 .addGap(5, 5, 5)
+//                                .addGap(50, 50, 50)
 //                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(buttonHome)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -292,6 +278,9 @@ public class PanelLeftBody extends javax.swing.JPanel {
         );
     }
 
+    /**
+     * Logic for create new Playlist and set the playlist panel in the central body
+     */
     private void createNewPlaylist() {
 //            Number of the position where the new playlist panel is created
         String positionOfNewPlaylist = PanelBodyCentral.createNewPanel();
@@ -305,11 +294,6 @@ public class PanelLeftBody extends javax.swing.JPanel {
 //            Resizing the size of the jPanel with the playlist buttons
         updatePanelPlaylistButtons(playlistButton, yWhereLoadPlaylistButtons);
         playlistButton.setBackground(Color.red);
-    }
-
-    private void setConfigurationPopUpMenu() {
-        // Create popup menu, attach popup menu listener
-        buttonOptions.setComponentPopupMenu(popUpMenuOptions);
     }
 
 
