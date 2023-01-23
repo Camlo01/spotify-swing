@@ -1,10 +1,31 @@
 package com.musica.musicar.view.GUI.jPanelBottomBar;
 
+import com.musica.musicar.logic.Display;
+import com.musica.musicar.logic.reproduction.HandlePlayback;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
 
 public class PanelPlayerOptions extends JPanel {
 
+
+    private boolean isInfoDisplayed = false;
+    //    private final String song = "Aventura - Volví.mp3";
+//    private final String song = "50 Cent - 21 Questions.mp3";
+//    private final String song = "Bad Bunny - Tití Me Preguntó.mp3";
+//    private final String song = "Childish Gambino - Me and Your Mama.mp3";
+//    private final String song = "The Weeknd - Is There Someone Else.mp3";
+    private final String song = "Lil Nas X - THATS WHAT I WANT.mp3";
+    //    private final String song = "Maluma - Cositas de la USA.mp3";
+    private final String path = "C:\\Users\\Camilo\\Desktop\\music-library\\" + song;
+
+
+    //useful classes
+    private HandlePlayback handle = new HandlePlayback();
+    private Display display = new Display();
 
     private javax.swing.JSlider jSliderMusicBar = new JSlider();
     private javax.swing.JButton buttonPlayerBackSong = new JButton();
@@ -13,11 +34,12 @@ public class PanelPlayerOptions extends JPanel {
     private javax.swing.JButton buttonPlayerRandomMusic = new JButton();
     private javax.swing.JButton buttonPlayerRepeat = new JButton();
 
-    public PanelPlayerOptions() {
-        initComponents();
+    public PanelPlayerOptions(JPanel cover, JLabel title, JLabel artist) {
+        initComponents(cover, title, artist);
     }
 
-    private void initComponents() {
+
+    private void initComponents(JPanel cover, JLabel title, JLabel artist) {
 
 //        jSliderMusicBar
         jSliderMusicBar.setValue(0);
@@ -30,6 +52,40 @@ public class PanelPlayerOptions extends JPanel {
         buttonPlayerNextSong.setText(">");
         buttonPlayerRepeat.setText("O");
 
+        buttonPlayerBackSong.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Back song button pressed!");
+            }
+        });
+
+        buttonPlayerPlayPause.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+                File song = new File(path);
+                if (!isInfoDisplayed) {
+                    isInfoDisplayed = true;
+
+                    //Selecting file to use
+                    try {
+                        display.displayInformation(song, cover, title, artist);
+                    } catch (Exception x) {
+                        System.out.println(x);
+                    }
+                }
+                System.out.println();
+                handle.manageMusicPlayback(song);
+                System.out.println();
+            }
+        });
+
+        buttonPlayerNextSong.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.out.println("Next Song Button pressed!");
+            }
+        });
 
 
 //        Config of this panel
@@ -71,7 +127,7 @@ public class PanelPlayerOptions extends JPanel {
                                         .addComponent(buttonPlayerRepeat))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jSliderMusicBar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(17, 17, 17))
+                                .addGap(12, 12, 12))
         );
 
     }
