@@ -5,6 +5,11 @@ import java.awt.*;
 
 public class PanelBottomBar extends javax.swing.JPanel {
 
+    private javax.swing.JPanel panelPlayerCoverSong = new javax.swing.JPanel();
+    private javax.swing.JLabel labelPlayerArtistSong = new javax.swing.JLabel();
+    private javax.swing.JLabel labelPlayerTitleSong = new javax.swing.JLabel();
+
+
     //    Panels of music info
     private PanelMusicInfo panelMusicInfo;
 
@@ -21,8 +26,8 @@ public class PanelBottomBar extends javax.swing.JPanel {
 
     private void initComponents() {
 
-        panelMusicInfo = new PanelMusicInfo();
-        panelPlayerOptions = new PanelPlayerOptions();
+        panelMusicInfo = new PanelMusicInfo(panelPlayerCoverSong, labelPlayerTitleSong, labelPlayerArtistSong);
+        panelPlayerOptions = new PanelPlayerOptions(panelPlayerCoverSong, labelPlayerTitleSong, labelPlayerArtistSong);
         panelPlayerVolumen = new PanelPlayerVolumen();
 
         panelMusicInfo.setBackground(parentContainerColor);
