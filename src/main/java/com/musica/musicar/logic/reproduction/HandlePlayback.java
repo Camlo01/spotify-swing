@@ -24,7 +24,7 @@ public class HandlePlayback {
 
     //Player object with the song currently being produced
     private Player currentSong;
-
+    private String nameCurrentSong = "";
 
     //-------------------------------------------------------
     // Here should be implemented playlist logic in a future
@@ -45,59 +45,58 @@ public class HandlePlayback {
      */
     public void manageMusicPlayback(File song) {
 
-        //TO IMPLEMENT: Validate if the same song is playing or it is a new one
+        //It is evaluated if the received song is the same one that is playing
+        if (isItaNewSong(song)) {
+            DefaultSetValues();
+        }
 
-        //For now: only checks if the current song is playing and if it doesn't start playing
+        //Checks if the current song is playing and if it doesn't, start playing
         if (!isPlayingCurrentSong) {
-            isPlayingCurrentSong = true;
+            isPlayingCurrentSong = true; //isPlayingCurrentSong is marked true
             System.out.println("PLAY");
 
-            //capturing time at which playback starts
-            startedTimePlaySong = System.currentTimeMillis();
             playSong(song);
 
+            //Once the song is produced, it is evaluated if it is paused or
+            //resumed according to the playback status
         } else {
-            //Once the song is produced, it is evaluated if it is paused or resumed
 
+            //If the song is not paused, the code block begins to execute
             if (!isPaused) {
                 isPaused = true;
                 System.out.println("PAUSE");
-
-                //capturing time at which playback stops
-                pausedTimeSong = System.currentTimeMillis();
-
                 stopSong();
 
             } else {
                 isPaused = false;
                 System.out.println("RESUME");
 
+                //Elapsed time is calculated from the start until the song was paused
+                long timeElapsed = (pausedTimeSong - startedTimePlaySong) / 1000;
+                System.out.println("Última tiempo reproducción: " + timeElapsed);
 
-                //
-                long totalPlayingTime = (pausedTimeSong - startedTimePlaySong) / 1000;
-
-                System.out.println("INICIO: " + startedTimePlaySong / 1000 + " PAUSA: " + pausedTimeSong / 1000);
-                System.out.println("Última reproducción: " + totalPlayingTime);
-
-                resume(song, (int) totalPlayingTime - 1);
+                resume(song, (int) timeElapsed - 2);
 
             }
         }
     }
 
-
     /**
      * Method responsible for playing only mp3 files
+     * - Song is playing in a new thread
+     * - the moment when the song is played is captured in a new thread
      *
      * @param mp3 file played in Player object
      */
     private void playSong(File mp3) {
+
+        //The name of the song that starts to play is saved to compare later if a new song is played
+        nameCurrentSong = mp3.getName();
+
         new Thread() {
             @Override
             public void run() {
-                startedTimePlaySong = System.currentTimeMillis();
                 try {
-
                     long duration = mp3.length();
                     System.out.println("Duration of song: " + duration / 100000);
 
@@ -112,6 +111,14 @@ public class HandlePlayback {
 
             }
         }.start();
+        new Thread() {
+            @Override
+            public void run() {
+                //capturing time at which playback starts
+                startedTimePlaySong = System.currentTimeMillis();
+            }
+        }.start();
+
     }
 
     /**
@@ -154,7 +161,7 @@ public class HandlePlayback {
         new Thread() {
             @Override
             public void run() {
-                System.out.println("Ahora se reproduce la canción");
+                System.out.println("resume the song");
                 skipSeconds(song, totalPlaybackTime);
             }
         }.start();
@@ -172,9 +179,45 @@ public class HandlePlayback {
             public void run() {
                 currentSong.close();
                 currentSong = null;
-                System.out.println("Canción detenida");
+                System.out.println("stopped song");
+            }
+        }.start();
+        new Thread() {
+            @Override
+            public void run() {
+                //capturing time at which playback stops
+                pausedTimeSong = System.currentTimeMillis();
             }
         }.start();
     }
 
+    /**
+     * Method in charge of validating if the song that was received to be played is new
+     * or the same one that is currently being played
+     *
+     * @param song received
+     * @return boolean value
+     */
+    private boolean isItaNewSong(File song) {
+        if (nameCurrentSong.equals(song.getName())) {
+            System.out.println("same song");
+            return false;
+        } else {
+            System.out.println("new song");
+            return true;
+        }
+    }
+
+    /**
+     * playback values are reset
+     * this method is used when a new song is detected to be playing
+     */
+    private void DefaultSetValues() {
+        isPlayingCurrentSong = false;
+        isPaused = false;
+        if (nameCurrentSong != "") {
+            currentSong.close();
+        }
+        nameCurrentSong = "";
+    }
 }
