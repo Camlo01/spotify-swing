@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PanelPlayerVolumen extends JPanel {
+public class PanelPlayerVolume extends JPanel {
 
 
     private final javax.swing.JSlider jSliderVolumeBar = new javax.swing.JSlider();
@@ -17,7 +17,7 @@ public class PanelPlayerVolumen extends JPanel {
     private final JButton playQueue = new JButton("|||");
     private final JButton lyricsButton = new JButton("/°");
 
-    public PanelPlayerVolumen() {
+    public PanelPlayerVolume() {
         initComponents();
     }
 
