@@ -23,7 +23,7 @@ public class Display {
 
     /**
      * Method in charge of displaying on the screen the main information
-     * of the metadata of an mp3 file in the PanelMusicInfo panel
+     * of the metadata of a mp3 file in the PanelMusicInfo panel
      *
      * @param song        File object containing an mp3 file
      * @param panelCover  panel where the cover of the song is configured
@@ -48,6 +48,9 @@ public class Display {
 //            Each of the corresponding values of PanelMusicInfo are configured
             labelTitle.setText(title);
             labelArtist.setText(artist);
+
+            //The component is emptied if it has an image
+            panelCover.removeAll();
 
             //the song image is treated and set in the cover panel
             panelCover.setOpaque(false);
