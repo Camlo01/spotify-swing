@@ -9,9 +9,20 @@ import java.awt.font.TextAttribute;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Class that extends JPanel that displays the information of the song being played
+ */
 public class PanelMusicInfo extends javax.swing.JPanel {
 
+    private final JButton buttonLike = new JButton("<3");
 
+    /**
+     * Constructor that receives the information to display
+     *
+     * @param cover  to set
+     * @param title  to set
+     * @param artist to set
+     */
     public PanelMusicInfo(JPanel cover, JLabel title, JLabel artist) {
         initComponents(cover, title, artist);
     }
@@ -19,11 +30,13 @@ public class PanelMusicInfo extends javax.swing.JPanel {
 
     private void initComponents(JPanel panelCover, JLabel labelTitle, JLabel labelArtist) {
 
-//        Configuration title configuration
+//        Configuration title label
 
         labelTitle.setFont(new java.awt.Font("Dialog", 1, 12)); // NOI18N
         labelTitle.setText("Title song");
         labelTitle.setForeground(new Color(231, 231, 231));
+
+//        Configuration artist label
 
         labelArtist.addMouseMotionListener(new MouseMotionAdapter() {
             @Override
@@ -38,7 +51,6 @@ public class PanelMusicInfo extends javax.swing.JPanel {
             }
         });
 
-//        Configuration artist configuration
 
         labelArtist.setText("artist");
         labelArtist.setFont(new java.awt.Font("Dialog", 1, 10)); // NOI18N
@@ -62,37 +74,37 @@ public class PanelMusicInfo extends javax.swing.JPanel {
             }
         });
 
-//        Configuration
+//        Configuring button like
 
+        buttonLike.setFont(new Font("Dialog", 0, 10));
+        buttonLike.setPreferredSize(new Dimension(20, 20));
+        buttonLike.setBackground(new Color(24, 24, 24));
+
+//        Configuration of this panel
+
+        // background color by defect
         panelCover.setBackground(new java.awt.Color(0, 255, 24));
-//        panelCover.setPreferredSize(new java.awt.Dimension(12, 12));
-
-        javax.swing.GroupLayout panelPlayerCoverSongLayout = new javax.swing.GroupLayout(panelCover);
-        panelCover.setLayout(panelPlayerCoverSongLayout);
-        panelPlayerCoverSongLayout.setHorizontalGroup(
-                panelPlayerCoverSongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 60, Short.MAX_VALUE)
-        );
-        panelPlayerCoverSongLayout.setVerticalGroup(
-                panelPlayerCoverSongLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGap(0, 57, Short.MAX_VALUE)
-        );
-
 
 //        Config this panel
+//        setBackground(Color.red);
 
         javax.swing.GroupLayout panelMusicInfoLayout = new javax.swing.GroupLayout(this);
         setLayout(panelMusicInfoLayout);
         panelMusicInfoLayout.setHorizontalGroup(
                 panelMusicInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelMusicInfoLayout.createSequentialGroup()
-                                .addContainerGap(8, Short.MAX_VALUE)
-                                .addComponent(panelCover, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(18, 18, 18)
-                                .addGroup(panelMusicInfoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(labelArtist, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(labelTitle, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addContainerGap())
+                                .addGap(12)
+                                .addComponent(panelCover, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(15, 15, 15)
+                                .addGroup(panelMusicInfoLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(labelArtist, 10, 10, 100)
+                                        .addComponent(labelTitle, 10, 10, 100)
+                                )
+                                .addComponent(buttonLike, 20, 20, 20)
+                                .addGap(8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 0, Short.MAX_VALUE)
+                        )
+
         );
         panelMusicInfoLayout.setVerticalGroup(
                 panelMusicInfoLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
@@ -104,11 +116,11 @@ public class PanelMusicInfo extends javax.swing.JPanel {
                                         .addGroup(panelMusicInfoLayout.createSequentialGroup()
                                                 .addGap(7, 7, 7)
                                                 .addComponent(labelTitle)
-//                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(labelArtist))).addGap(13, 13, 13)
-                                .addContainerGap())
+                                                .addComponent(labelArtist))
+                                        .addComponent(buttonLike, GroupLayout.Alignment.CENTER, 20, 20, 20)
+                                )
+                                .addContainerGap()
+                        )
         );
     }
-
-
 }
