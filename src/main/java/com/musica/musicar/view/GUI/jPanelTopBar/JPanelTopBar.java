@@ -6,10 +6,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
+/**
+ * Class that extends from JPanel that serves as a title bar showing
+ * the options button and the window state management buttons (minimize, maximize, close)
+ */
 public class JPanelTopBar extends javax.swing.JPanel {
 
     private final JButton buttonOptions = new JButton();
-
     private final MenuOptions popUpMenuOptions = new MenuOptions(buttonOptions);
 
     public JPanelTopBar(JButton buttonMinimize, JButton buttonOpen, JButton buttonClose) {
