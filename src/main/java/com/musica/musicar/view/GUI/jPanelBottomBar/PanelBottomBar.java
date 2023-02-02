@@ -5,9 +5,9 @@ import java.awt.*;
 
 public class PanelBottomBar extends javax.swing.JPanel {
 
-    private javax.swing.JPanel panelPlayerCoverSong = new javax.swing.JPanel();
-    private javax.swing.JLabel labelPlayerArtistSong = new javax.swing.JLabel();
-    private javax.swing.JLabel labelPlayerTitleSong = new javax.swing.JLabel();
+    private final javax.swing.JPanel panelPlayerCoverSong = new javax.swing.JPanel();
+    private final javax.swing.JLabel labelPlayerArtistSong = new javax.swing.JLabel();
+    private final javax.swing.JLabel labelPlayerTitleSong = new javax.swing.JLabel();
 
 
     //    Panels of music info
@@ -17,7 +17,7 @@ public class PanelBottomBar extends javax.swing.JPanel {
     private PanelPlayerOptions panelPlayerOptions;
 
     //    Panel of Player Volume
-    private PanelPlayerVolumen panelPlayerVolumen;
+    private PanelPlayerVolume panelPlayerVolume;
     public Color parentContainerColor = new java.awt.Color(24, 24, 24);
 
     public PanelBottomBar() {
@@ -28,11 +28,11 @@ public class PanelBottomBar extends javax.swing.JPanel {
 
         panelMusicInfo = new PanelMusicInfo(panelPlayerCoverSong, labelPlayerTitleSong, labelPlayerArtistSong);
         panelPlayerOptions = new PanelPlayerOptions(panelPlayerCoverSong, labelPlayerTitleSong, labelPlayerArtistSong);
-        panelPlayerVolumen = new PanelPlayerVolumen();
+        panelPlayerVolume = new PanelPlayerVolume();
 
         panelMusicInfo.setBackground(parentContainerColor);
         panelPlayerOptions.setBackground(parentContainerColor);
-        panelPlayerVolumen.setBackground(parentContainerColor);
+        panelPlayerVolume.setBackground(parentContainerColor);
 
 
 //        Configuration of this panel
@@ -41,22 +41,17 @@ public class PanelBottomBar extends javax.swing.JPanel {
         javax.swing.GroupLayout panelBottomBarLayout = new javax.swing.GroupLayout(this);
         setLayout(panelBottomBarLayout);
         panelBottomBarLayout.setHorizontalGroup(
-                panelBottomBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                panelBottomBarLayout.createParallelGroup(GroupLayout.Alignment.CENTER)
                         .addGroup(panelBottomBarLayout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(panelMusicInfo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                                        .addComponent(panelPlayerOptions, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
-                                        .addComponent(panelPlayerVolumen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-//                                .addContainerGap()
-                                        .addGap(25, 25, 25)
+                                .addComponent(panelMusicInfo, 250, 250, Short.MAX_VALUE)
+                                .addComponent(panelPlayerOptions, 300, 300, 620)
+                                .addComponent(panelPlayerVolume, 230, 230, Short.MAX_VALUE)
                         )
         );
         panelBottomBarLayout.setVerticalGroup(
                 panelBottomBarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(panelPlayerOptions, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(panelPlayerVolumen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(panelPlayerVolume, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(panelMusicInfo, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
