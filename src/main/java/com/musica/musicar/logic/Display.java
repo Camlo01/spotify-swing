@@ -4,8 +4,12 @@ import com.mpatric.mp3agic.InvalidDataException;
 import com.mpatric.mp3agic.Mp3File;
 import com.mpatric.mp3agic.UnsupportedTagException;
 import com.musica.musicar.view.GUI.jPanelBottomBar.PanelMusicInfo;
+import javazoom.spi.mpeg.sampled.file.MpegAudioFileReader;
 
 import javax.imageio.ImageIO;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -63,6 +67,44 @@ public class Display {
             e.printStackTrace();
         }
 
+    }
+
+    /**
+     * Method in charge of showing the complete duration of the song expressed in minutes on the screen
+     *
+     * @param song                 file from which to extract the information
+     * @param labelCurrentDuration label of the current duration of the song
+     * @param labelTotalDuration   label of the total duration of the song expressed in minutes
+     */
+    public void displayTime(File song, JLabel labelCurrentDuration, JLabel labelTotalDuration) {
+        //obtain duration of
+        String totalDuration = getDurationFile(song);
+        labelTotalDuration.setText(totalDuration);
+    }
+
+    //--- UTIL METHODS
+
+    /**
+     * Method that returns a String of the duration of a mp3 file
+     *
+     * @param song to get duration
+     * @return String of duration in minutes (3:50 example)
+     */
+    private String getDurationFile(File song) {
+        AudioFileFormat fileFormat = null;
+        try {
+            fileFormat = new MpegAudioFileReader().getAudioFileFormat(song);
+            AudioFormat format = fileFormat.getFormat();
+            long frames = fileFormat.getFrameLength();
+            double durationInSeconds = (frames + 0.0) / format.getFrameRate();
+            int minutes = (int) (durationInSeconds / 60);
+            int seconds = (int) (durationInSeconds % 60);
+
+            return minutes + ":" + seconds;
+
+        } catch (UnsupportedAudioFileException | IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }
