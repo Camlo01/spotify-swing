@@ -7,7 +7,9 @@ import javazoom.jl.decoder.JavaLayerException;
 import javazoom.jl.player.Player;
 import com.mpatric.mp3agic.Mp3File;
 
+import javax.swing.*;
 import java.io.*;
+import java.lang.reflect.InvocationTargetException;
 
 /**
  * Playlist class in charge of handling file playback
@@ -173,15 +175,15 @@ public class HandlePlayback {
      * <p>
      * To continue its reproduction, you must adjust the time in which you want with the skipSeconds() method.
      */
-    private void stopSong() {
-        new Thread() {
+    public void stopSong() {
+        SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 currentSong.close();
                 currentSong = null;
                 System.out.println("stopped song");
             }
-        }.start();
+        });
         new Thread() {
             @Override
             public void run() {
