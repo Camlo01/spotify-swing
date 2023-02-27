@@ -3,10 +3,11 @@ package com.musica.musicar.view.GUI.jPanelBottomBar;
 import com.musica.musicar.RoundedButtonHelper;
 import com.musica.musicar.logic.Display;
 import com.musica.musicar.logic.reproduction.HandlePlayback;
+import com.musica.musicar.styles.StylesJSliderNormal;
+import com.musica.musicar.styles.StylesJSliderOver;
 
 import javax.swing.*;
 import javax.swing.plaf.SliderUI;
-import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -20,15 +21,15 @@ import java.io.File;
 public class PanelPlayerOptions extends JPanel {
 
     private boolean isInfoDisplayed = false;
-    private final String song1 = "Aventura - Volví.mp3";
-    //    private final String song = "50 Cent - 21 Questions.mp3";
-    //    private final String song = "Bad Bunny - Tití Me Preguntó.mp3";
-    //    private final String song = "Childish Gambino - Me and Your Mama.mp3";
-    //    private final String song2 = "The Weeknd - Is There Someone Else.mp3";
-    //    private final String song = "Lil Nas X - THATS WHAT I WANT.mp3";
-    //    private final String song = "Entamoeba Histolytica - You Suffer (Napalm Death Cover).mp3";
-    //    private final String song = "Maluma - Cositas de la USA.mp3";
-    private final String path = "C:\\Users\\Camilo\\Desktop\\music-library\\";
+    private final String songToReproduce = "Aventura - Volví.mp3";
+    //    private final String songToReproduce = "50 Cent - 21 Questions.mp3";
+    //    private final String songToReproduce = "Bad Bunny - Tití Me Preguntó.mp3";
+    //    private final String songToReproduce = "Childish Gambino - Me and Your Mama.mp3";
+    private final String songToReproduce2 = "The Weeknd - Is There Someone Else.mp3";
+    //    private final String songToReproduce = "Lil Nas X - THATS WHAT I WANT.mp3";
+    //    private final String songToReproduce = "Entamoeba Histolytica - You Suffer (Napalm Death Cover).mp3";
+    //    private final String songToReproduce = "Maluma - Cositas de la USA.mp3";
+    private final String path = "C:\\Users\\Milo\\Desktop\\music-library\\";
 
 
     //useful classes
@@ -42,8 +43,13 @@ public class PanelPlayerOptions extends JPanel {
     private final javax.swing.JButton buttonPlayerRandomMusic = new JButton();
     private final javax.swing.JButton buttonPlayerRepeat = new JButton();
 
-    private JLabel currentMinute = new JLabel("0:00");
-    private JLabel totalDuration = new JLabel("1:11");
+    private final JLabel currentMinute = new JLabel("0:00");
+    private final JLabel totalDuration = new JLabel("0:00");
+
+    private final int PROGRESS_BAR_AND_VALUE = 1; //for initialization PROGRESS_BAR_AND_VALUE
+    private int actualProgressBar = PROGRESS_BAR_AND_VALUE;
+
+//    private final int lastWidthJSliderMusicBar = 270;
 
     public PanelPlayerOptions(JPanel cover, JLabel title, JLabel artist) {
         initComponents(cover, title, artist);
@@ -57,69 +63,75 @@ public class PanelPlayerOptions extends JPanel {
         setTextSettings(totalDuration);
 
 //        Configuring styles to JSlider
-        SliderUI stylesNormal = new BasicSliderUI() {
-            @Override
-            public void paintFocus(Graphics g) {
-            }
-
-            @Override
-            public void paintThumb(Graphics g) {
-            }
-
-            @Override
-            public void paintTrack(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                        RenderingHints.VALUE_ANTIALIAS_ON);
-                g.setColor(new Color(94, 94, 94));
-                g2d.fillRoundRect(trackRect.x, (trackRect.height / 2), trackRect.width, 4, 10, 10);
-            }
-        };
-        SliderUI stylesOver = new BasicSliderUI() {
-
-            //Override the paint Focus method to remove the dotted border that appears on the JSlideBar
-            @Override
-            public void paintFocus(Graphics g) {
-            }
-
-            //Providing styles on the progress bar button
-            public void paintThumb(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                        RenderingHints.VALUE_ANTIALIAS_ON);
-                g2d.setColor(Color.WHITE);
-                g2d.fillOval(thumbRect.x, (thumbRect.height / 2) - 3, thumbRect.width, thumbRect.height / 2);
-
-            }
-
-            //providing styles over the bar
-            @Override
-            public void paintTrack(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                        RenderingHints.VALUE_ANTIALIAS_ON);
-                g.setColor(new Color(94, 94, 94));
-                g2d.fillRoundRect(trackRect.x, (trackRect.height / 2), trackRect.width, 4, 10, 10);
-            }
-
-
-        };
 
         jSliderMusicBar.setBackground(new Color(24, 24, 24));
-        jSliderMusicBar.setUI(stylesNormal);
+        jSliderMusicBar.setUI(new StylesJSliderNormal(actualProgressBar));
         jSliderMusicBar.setModel(new DefaultBoundedRangeModel(1, 0, 0, 100));
+        jSliderMusicBar.setMajorTickSpacing(1);
+        jSliderMusicBar.setValue(actualProgressBar);
 
 
-        jSliderMusicBar.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                jSliderMusicBar.setUI(stylesOver);
-            }
-        });
         jSliderMusicBar.addMouseListener(new MouseAdapter() {
+
+            // Styles for when only clicked
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                jSliderMusicBar.setValue(e.getX());
+                actualProgressBar = jSliderMusicBar.getValue();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        SliderUI toApply = new StylesJSliderOver(actualProgressBar);
+                        jSliderMusicBar.setUI(toApply);
+                    }
+                });
+            }
+
+            // Styles when mouse is no longer over
             @Override
             public void mouseExited(MouseEvent e) {
-                jSliderMusicBar.setUI(stylesNormal);
+                actualProgressBar = jSliderMusicBar.getValue();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        SliderUI toApply = new StylesJSliderNormal(actualProgressBar);
+                        jSliderMusicBar.setUI(toApply);
+                    }
+                });
+
+            }
+
+            // Styles when mouse is over mouse
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                updateMaxValue(jSliderMusicBar);
+                actualProgressBar = jSliderMusicBar.getValue();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        SliderUI toApply = new StylesJSliderOver(actualProgressBar);
+                        jSliderMusicBar.setUI(toApply);
+                    }
+                });
+            }
+        });
+        jSliderMusicBar.addMouseMotionListener(new MouseAdapter() {
+
+            // Styles are applied each time the mouse is moved while the click is held
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                super.mouseDragged(e);
+                jSliderMusicBar.setValue(e.getX());
+                updateMaxValue(jSliderMusicBar);
+                actualProgressBar = jSliderMusicBar.getValue();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        SliderUI toApply = new StylesJSliderOver(actualProgressBar);
+                        jSliderMusicBar.setUI(toApply);
+                    }
+                });
             }
         });
 
@@ -150,13 +162,14 @@ public class PanelPlayerOptions extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
 
-                File song = new File(path + song1);
+                File song = new File(path + songToReproduce);
                 if (!isInfoDisplayed) {
                     isInfoDisplayed = true;
 
                     //Selecting file to use
                     try {
                         DISPLAY.displayInformation(song, cover, title, artist);
+                        DISPLAY.displayTime(song, currentMinute, totalDuration);
                     } catch (Exception x) {
                         System.out.println(x);
                     }
@@ -170,6 +183,25 @@ public class PanelPlayerOptions extends JPanel {
         buttonPlayerNextSong.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                isInfoDisplayed = false;
+                HANDLE.stopSong();
+
+                File song = new File(path + songToReproduce2);
+                if (!isInfoDisplayed) {
+                    isInfoDisplayed = true;
+
+                    //Selecting file to use
+                    try {
+                        DISPLAY.displayInformation(song, cover, title, artist);
+                        DISPLAY.displayTime(song, currentMinute, totalDuration);
+                    } catch (Exception x) {
+                        System.out.println(x);
+                    }
+                }
+                System.out.println();
+                HANDLE.manageMusicPlayback(song);
+                System.out.println();
+
                 System.out.println("Next Song Button pressed!");
             }
         });
@@ -193,7 +225,7 @@ public class PanelPlayerOptions extends JPanel {
                                                 .addGap(8)
                                         )
                                         .addGroup(GroupLayout.Alignment.CENTER, panelPlayerOptionsLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                                                 .addComponent(buttonPlayerRandomMusic, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(buttonPlayerBackSong, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
@@ -203,7 +235,7 @@ public class PanelPlayerOptions extends JPanel {
                                                 .addComponent(buttonPlayerNextSong, GroupLayout.PREFERRED_SIZE, 30, GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.UNRELATED)
                                                 .addComponent(buttonPlayerRepeat, GroupLayout.PREFERRED_SIZE, 32, GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
                                         )
                                 )
                         )
@@ -250,6 +282,33 @@ public class PanelPlayerOptions extends JPanel {
         button.setBorder(new RoundedButtonHelper());
         button.setBackground(new Color(24, 24, 24));
         button.setForeground(Color.white);
+    }
+
+//    private void getInfoSlider(JSlider slider) {
+//        int width = slider.getWidth();
+//        if (lastWidthJSliderMusicBar != width) {
+//
+//            System.out.println("Tamaño Slider");
+//            System.out.println(slider.getWidth());
+//            System.out.println();
+//            System.out.println("Slider");
+//            System.out.println(slider.getValue());
+//            int lastValue = slider.getValue();
+//            int newMax = slider.getWidth();
+//            slider.setValue(newMax);
+//            slider.setModel(new DefaultBoundedRangeModel(lastValue, 0, 1, newMax));
+//
+//        }
+//    }
+
+
+    private void updateMaxValue(JSlider slider) {
+        int lastValue = slider.getValue();
+        Rectangle trackRect = slider.getBounds();
+        int trackRectWidth = trackRect.width;
+//        System.out.println("Medida de la barra " +trackRectWidth);
+
+        slider.setModel(new DefaultBoundedRangeModel(lastValue, 0, 1, trackRectWidth));
     }
 
 }
