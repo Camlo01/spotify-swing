@@ -70,7 +70,6 @@ public class PanelPlayerOptions extends JPanel {
         jSliderMusicBar.setMajorTickSpacing(1);
         jSliderMusicBar.setValue(actualProgressBar);
 
-
         jSliderMusicBar.addMouseListener(new MouseAdapter() {
 
             // Styles for when only clicked
@@ -123,7 +122,7 @@ public class PanelPlayerOptions extends JPanel {
             public void mouseDragged(MouseEvent e) {
                 super.mouseDragged(e);
                 jSliderMusicBar.setValue(e.getX());
-                updateMaxValue(jSliderMusicBar);
+//                updateMaxValue(jSliderMusicBar);
                 actualProgressBar = jSliderMusicBar.getValue();
                 SwingUtilities.invokeLater(new Runnable() {
                     @Override
@@ -183,25 +182,6 @@ public class PanelPlayerOptions extends JPanel {
         buttonPlayerNextSong.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                isInfoDisplayed = false;
-                HANDLE.stopSong();
-
-                File song = new File(path + songToReproduce2);
-                if (!isInfoDisplayed) {
-                    isInfoDisplayed = true;
-
-                    //Selecting file to use
-                    try {
-                        DISPLAY.displayInformation(song, cover, title, artist);
-                        DISPLAY.displayTime(song, currentMinute, totalDuration);
-                    } catch (Exception x) {
-                        System.out.println(x);
-                    }
-                }
-                System.out.println();
-                HANDLE.manageMusicPlayback(song);
-                System.out.println();
-
                 System.out.println("Next Song Button pressed!");
             }
         });
@@ -284,31 +264,17 @@ public class PanelPlayerOptions extends JPanel {
         button.setForeground(Color.white);
     }
 
-//    private void getInfoSlider(JSlider slider) {
-//        int width = slider.getWidth();
-//        if (lastWidthJSliderMusicBar != width) {
-//
-//            System.out.println("Tamaño Slider");
-//            System.out.println(slider.getWidth());
-//            System.out.println();
-//            System.out.println("Slider");
-//            System.out.println(slider.getValue());
-//            int lastValue = slider.getValue();
-//            int newMax = slider.getWidth();
-//            slider.setValue(newMax);
-//            slider.setModel(new DefaultBoundedRangeModel(lastValue, 0, 1, newMax));
-//
-//        }
-//    }
-
-
-    private void updateMaxValue(JSlider slider) {
-        int lastValue = slider.getValue();
-        Rectangle trackRect = slider.getBounds();
+    /**
+     * Method so that in case the JSlider has been resized, it takes its size and allows to configure the desired value
+     *
+     * @param jSlider jSlider for update value
+     */
+    private void updateMaxValue(JSlider jSlider) {
+        int lastValue = jSlider.getValue();
+        Rectangle trackRect = jSlider.getBounds();
         int trackRectWidth = trackRect.width;
-//        System.out.println("Medida de la barra " +trackRectWidth);
-
-        slider.setModel(new DefaultBoundedRangeModel(lastValue, 0, 1, trackRectWidth));
+        System.out.println("Medida de la barra " + trackRectWidth);
+        jSlider.setModel(new DefaultBoundedRangeModel(lastValue, 0, 1, trackRectWidth));
     }
 
 }
