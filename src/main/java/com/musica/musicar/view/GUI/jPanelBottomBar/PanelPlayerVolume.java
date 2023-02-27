@@ -1,8 +1,10 @@
 package com.musica.musicar.view.GUI.jPanelBottomBar;
 
+import com.musica.musicar.styles.StylesJSliderNormal;
+import com.musica.musicar.styles.StylesJSliderOver;
+
 import javax.swing.*;
 import javax.swing.plaf.SliderUI;
-import javax.swing.plaf.basic.BasicSliderUI;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,6 +19,9 @@ public class PanelPlayerVolume extends JPanel {
     private final JButton playQueue = new JButton("|||");
     private final JButton lyricsButton = new JButton("/°");
 
+    private final int progressBarAndValue = 1; //for initialization
+    private int actualProgressBar = progressBarAndValue;
+
     public PanelPlayerVolume() {
         initComponents();
     }
@@ -30,70 +35,72 @@ public class PanelPlayerVolume extends JPanel {
         buttonConfiguration(playQueue);
         buttonConfiguration(lyricsButton);
 
-//        Configuring styles to JSlider
-
-        SliderUI stylesNormal = new BasicSliderUI() {
-            @Override
-            public void paintFocus(Graphics g) {
-            }
-
-            @Override
-            public void paintThumb(Graphics g) {
-            }
-
-            @Override
-            public void paintTrack(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                        RenderingHints.VALUE_ANTIALIAS_ON);
-                g.setColor(new Color(94, 94, 94));
-                g2d.fillRoundRect(trackRect.x, (trackRect.height / 2), trackRect.width, 4, 10, 10);
-            }
-        };
-        SliderUI stylesOver = new BasicSliderUI() {
-
-            //Override the paint Focus method to remove the dotted border that appears on the JSlideBar
-            @Override
-            public void paintFocus(Graphics g) {
-            }
-
-            //Providing styles on the progress bar button
-            public void paintThumb(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                        RenderingHints.VALUE_ANTIALIAS_ON);
-                g2d.setColor(Color.WHITE);
-                g2d.fillOval(thumbRect.x, (thumbRect.height / 2) - 3, thumbRect.width, thumbRect.height / 2);
-
-            }
-
-            //providing styles over the bar
-            @Override
-            public void paintTrack(Graphics g) {
-                Graphics2D g2d = (Graphics2D) g;
-                g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-                        RenderingHints.VALUE_ANTIALIAS_ON);
-                g.setColor(new Color(94, 94, 94));
-                g2d.fillRoundRect(trackRect.x, (trackRect.height / 2), trackRect.width, 4, 10, 10);
-            }
-
-
-        };
-
+//        Configuring styles to JSlider min 0 - max 77
 
         jSliderVolumeBar.setBackground(new Color(24, 24, 24));
-        jSliderVolumeBar.setUI(stylesNormal);
+        jSliderVolumeBar.setUI(new StylesJSliderNormal(actualProgressBar));
+        jSliderVolumeBar.setModel(new DefaultBoundedRangeModel(1, 0, 0, 77));
+        jSliderVolumeBar.setMajorTickSpacing(1);
+        jSliderVolumeBar.setValue(progressBarAndValue);
 
-        jSliderVolumeBar.addMouseMotionListener(new MouseAdapter() {
-            @Override
-            public void mouseMoved(MouseEvent e) {
-                jSliderVolumeBar.setUI(stylesOver);
-            }
-        });
         jSliderVolumeBar.addMouseListener(new MouseAdapter() {
+
+            // Styles for when only clicked
+            @Override
+            public void mousePressed(MouseEvent e) {
+                super.mousePressed(e);
+                jSliderVolumeBar.setValue(e.getX() - 5);
+                actualProgressBar = jSliderVolumeBar.getValue();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        SliderUI toApply = new StylesJSliderOver(actualProgressBar);
+                        jSliderVolumeBar.setUI(toApply);
+                    }
+                });
+            }
+
+            // Styles when mouse is no longer over
             @Override
             public void mouseExited(MouseEvent e) {
-                jSliderVolumeBar.setUI(stylesNormal);
+                actualProgressBar = jSliderVolumeBar.getValue();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        SliderUI toApply = new StylesJSliderNormal(actualProgressBar);
+                        jSliderVolumeBar.setUI(toApply);
+                    }
+                });
+            }
+
+            // Styles when mouse is over mouse
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                actualProgressBar = jSliderVolumeBar.getValue();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        SliderUI toApply = new StylesJSliderOver(actualProgressBar);
+                        jSliderVolumeBar.setUI(toApply);
+                    }
+                });
+            }
+        });
+        jSliderVolumeBar.addMouseMotionListener(new MouseAdapter() {
+
+            // Styles are applied each time the mouse is moved while the click is held
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                super.mouseDragged(e);
+                jSliderVolumeBar.setValue(e.getX() - 5);
+                actualProgressBar = jSliderVolumeBar.getValue();
+                SwingUtilities.invokeLater(new Runnable() {
+                    @Override
+                    public void run() {
+                        SliderUI toApply = new StylesJSliderOver(actualProgressBar);
+                        jSliderVolumeBar.setUI(toApply);
+                    }
+                });
             }
         });
 
