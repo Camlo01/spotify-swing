@@ -17,11 +17,19 @@
             <version>1.0.1</version>
         </dependency>
 
-        <!-- Dependency to measure bitrate of an mp3 file and get metadata -->
+        <!-- Dependency to measure bitrate of a mp3 file and get metadata -->
         <dependency>
             <groupId>com.mpatric</groupId>
             <artifactId>mp3agic</artifactId>
             <version>0.9.1</version>
+        </dependency>
+
+        <!--        Dependency to calc the duration of song -->
+        <!-- https://mvnrepository.com/artifact/com.googlecode.soundlibs/mp3spi -->
+        <dependency>
+            <groupId>com.googlecode.soundlibs</groupId>
+            <artifactId>mp3spi</artifactId>
+            <version>1.9.5-1</version>
         </dependency>
 
     </dependencies>
