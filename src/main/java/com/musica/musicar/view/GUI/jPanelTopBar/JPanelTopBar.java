@@ -58,13 +58,6 @@ public class JPanelTopBar extends javax.swing.JPanel {
                         .addGap(5, 5, 5)
         );
 
-//        adding behaviors to buttons
-        buttonClose.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                System.exit(0);
-            }
-        });
     }
 
     /**
