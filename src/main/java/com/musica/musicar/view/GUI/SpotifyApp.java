@@ -46,6 +46,8 @@ public class SpotifyApp extends javax.swing.JFrame {
 
     // Values that store the last size and position value of the window
     // They are also used for window position and resizing logic
+    private int lastLocationX; // when it comes to resizing in a much smaller size place in the last position
+    private int lastLocationY; // when it comes to resizing in a much smaller size place in the last position
     private int lBeforeX; // last X axis location
     private int lBeforeY; // last Y axis location
     private int wBeforeWidth = 800; // last window width measurement
@@ -63,6 +65,7 @@ public class SpotifyApp extends javax.swing.JFrame {
         initComponents();
     }
 
+
     @SuppressWarnings("unchecked")
     private void initComponents() {
         isFullOpen = false; // The isFullOpen value is initialized to false because the window is opened minimized
@@ -72,8 +75,32 @@ public class SpotifyApp extends javax.swing.JFrame {
         panelBody = new PanelBody();
         panelTopBar = new JPanelTopBar(buttonMinimize, buttonOpen, buttonClose);
 
-//        Set configuration to buttons that are into the panelTopBar
+//       Setting the configuration in the top panel to reposition the JFrame
 
+        panelTopBar.addMouseMotionListener(new MouseMotionAdapter() {
+            @Override
+            public void mouseDragged(MouseEvent e) {
+                setLocation(getX() + e.getX() - positionX, getY() + e.getY() - positionY);
+                lastLocationX = THIS_JFRAME.getX();
+                lastLocationY = THIS_JFRAME.getY();
+            }
+        });
+        panelTopBar.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mousePressed(MouseEvent e) {
+                positionX = e.getX();
+                positionY = e.getY();
+            }
+        });
+
+        buttonClose.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+        });
+
+//        Set configuration to buttons that are into the panelTopBar
         buttonOpen.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -114,7 +141,7 @@ public class SpotifyApp extends javax.swing.JFrame {
         getRootPane().setWindowDecorationStyle(JRootPane.WHEN_FOCUSED);
         setLocationRelativeTo(null);
 
-        THIS_JFRAME.addMouseMotionListener(new MouseAdapter() {
+        addMouseMotionListener(new MouseAdapter() {
             int lBeforeX = (int) getLocation().getX();
             int lBeforeY = (int) getLocation().getY();
             int wBeforeWidth = getWidth();
@@ -193,14 +220,15 @@ public class SpotifyApp extends javax.swing.JFrame {
                     int newXAxis = lBeforeX + e.getX();
 
                     if (newWidth >= MINIMIUM_WIDTH && newHeight >= MINIMIUM_HEIGHT) {
-                        setSize(newWidth, newHeight);
+
+                        setSize(Math.max(MINIMIUM_WIDTH, newWidth), Math.max(MINIMIUM_HEIGHT, newHeight));
                         setLocation(newXAxis, lBeforeY);
-
                     } else if (newWidth < MINIMIUM_WIDTH) {
-                        setSize(wBeforeWidth, Math.max(MINIMIUM_HEIGHT, newHeight));
+                        setSize(Math.max(MINIMIUM_WIDTH, newWidth), Math.max(MINIMIUM_HEIGHT, newHeight));
+                        setLocation(lastLocationX, getY());
 
-                    } else {
-                        setSize(newWidth, wBeforeHeight);
+                    } else if (newHeight < MINIMIUM_HEIGHT) {
+                        setSize(newWidth, Math.max(MINIMIUM_HEIGHT, newHeight));
                         setLocation(newXAxis, lBeforeY);
                     }
 
@@ -233,6 +261,8 @@ public class SpotifyApp extends javax.swing.JFrame {
 
                     if (newHeight > MINIMIUM_HEIGHT) {
                         setSize(getWidth(), newHeight);
+                    } else {
+                        setSize(getWidth(), MINIMIUM_HEIGHT);
                     }
                 } else if (getCursor() == LEFT_CURSOR) {
                     int newXAxis = (int) getLocation().getX() + mouseX;
@@ -241,18 +271,38 @@ public class SpotifyApp extends javax.swing.JFrame {
                     if (newWidth >= MINIMIUM_WIDTH) {
                         setSize(newWidth, getHeight());
                         setLocation(newXAxis, getY());
+                        System.out.println("AAA");
+                        System.out.println("lastLocationX: " + lastLocationX);
+                        System.out.println("newXAxis: " + newXAxis);
+
+                        System.out.println();
+                        System.out.println();
+                        System.out.println();
+                    } else
+//                        if ()
+                    {
+                        setSize(Math.max(MINIMIUM_WIDTH, newWidth), getHeight());
+//                        setLocation(newXAxis, getY());
+                        setLocation(lastLocationX, getY());
+                        System.out.println("BBB");
+                        System.out.println("lastLocationX: " + lastLocationX);
+                        System.out.println("newXAxis: " + newXAxis);
+
+                        System.out.println();
+                        System.out.println();
+                        System.out.println();
                     }
+
                 } else if (getCursor() == RIGHT_CURSOR) {
                     int newWidth = lBeforeX + (mouseX - lBeforeX);
 
                     if (newWidth >= MINIMIUM_WIDTH) {
                         setSize(newWidth, getHeight());
                     }
-                }
-
-                //It is validated that from the taskbar you are pressing to be able to move the window
-                if (getCursor() == DEFAULT_CURSOR && isClickedOnTopEdge(THIS_JFRAME, e)) {
-                    setLocation(getX() + e.getX() - positionX, getY() + e.getY() - positionY);
+//                    Code to replicate for avoid error when its resizing
+                    else {
+                        setSize(MINIMIUM_WIDTH, getHeight());
+                    }
                 }
 
 //                updating values
@@ -262,19 +312,29 @@ public class SpotifyApp extends javax.swing.JFrame {
                 wBeforeHeight = getHeight();
             }
         });
-
-        THIS_JFRAME.addMouseListener(new MouseAdapter() {
+        addMouseListener(new MouseAdapter() {
             /**
              * Capture mouse position on pressing the JFrame
              * @param e MouseEvent
-             * @Override
              */
             @Override
             public void mousePressed(MouseEvent e) {
                 positionX = e.getX();
                 positionY = e.getY();
+//                lastLocationX = THIS_JFRAME.getX();
+//                lastLocationY = THIS_JFRAME.getY();
+            }
+
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                lastLocationX = THIS_JFRAME.getX();
+                lastLocationY = THIS_JFRAME.getY();
             }
         });
+
+
+        lastLocationX = THIS_JFRAME.getX();
+        lastLocationY = THIS_JFRAME.getY();
     }
 
     //-------------------------------------------------------
@@ -320,19 +380,6 @@ public class SpotifyApp extends javax.swing.JFrame {
         Insets taskbar = Toolkit.getDefaultToolkit().getScreenInsets(getGraphicsConfiguration());
         setBounds(0, 0, screenSize.width, screenSize.height - taskbar.bottom);
         isFullOpen = true;
-    }
-
-    /**
-     * Method in charge of verifying that it has been pressed from the title bar
-     *
-     * @param frame frame to evaluate
-     * @param e     MouseEvent to evaluate
-     * @return True if pressed from the title bar
-     */
-    private boolean isClickedOnTopEdge(JFrame frame, MouseEvent e) {
-        double MARGIN = RESIZE_MARGIN;
-        return (e.getX() > MARGIN && e.getX() <= frame.getWidth() - MARGIN &&
-                e.getY() > MARGIN && e.getY() <= 36);
     }
 
     /**
